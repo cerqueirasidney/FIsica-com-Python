@@ -35,9 +35,3 @@ O projeto está dividido em capítulos, cobrindo as grandes áreas da Física:
 ---
 
 ## 💻 Demonstração Visual
-
-*(Dica: À medida que for criando os scripts com a biblioteca Matplotlib, salve os gráficos gerados como imagem ou GIF e substitua o exemplo abaixo para impressionar quem visita seu perfil!)*
-
-```text
-[Gráfico Animado ou Print da Simulação rodando]
-Exemplo: Trajetória do lançamento de um projétil variando o ângulo de disparo.
