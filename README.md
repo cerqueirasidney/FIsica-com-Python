@@ -51,30 +51,3 @@ Para rodar as simulações localmente, você precisa ter o Python instalado e ba
 1. **Clone este repositório:**
    ```bash
    git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/seu-usuario/nome-do-repositorio.git)
-
-2.Instale todas as dependências de uma só vez:
-
-pip install -r requirements.txt
-
-
-3.Navegue até o capítulo desejado e execute o script:
-
-cd capitulo_01_mecanica
-python lancamento_projeteis.py
-
-
-
-👨‍🏫 Autor e Contato
-Prof. Sidney Junior Físico, Mestre em Engenharia Elétrica e Produtor de Conteúdo Educacional.
-
-Se você tem interesse em física computacional, desenvolvimento de software científico, mentoria ou quer trocar uma ideia sobre o projeto, entre em contato através dos canais da marca Física com Sidney:
-
-✉️ E-mail: cerqueirasidney@gmail.com
-
-🎥 YouTube: @fisicacomsidney
-
-📸 Instagram: @fisicacomsidney
-
-📱 TikTok: @fisicacomsidney
-
-Desenvolvido com 💙 para tornar a Física mais visual e acessível através do código.
