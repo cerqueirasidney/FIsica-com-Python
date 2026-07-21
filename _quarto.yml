@@ -33,8 +33,13 @@ format:
     toc: true
     code-copy: true
     code-fold: false
+    fig-align: center
+    fig-responsive: true
   pdf:
     documentclass: scrreprt
+
+fig-format: png
+fig-dpi: 150
 
 execute:
   freeze: auto

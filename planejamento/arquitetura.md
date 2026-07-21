@@ -19,6 +19,35 @@ Este documento orienta a construção do livro. Os cinco volumes de *Understandi
 7. exercícios conceituais, analíticos e computacionais;
 8. síntese e próximos passos.
 
+## Dupla progressão: Física e Python
+
+O leitor não receberá códigos prontos sem preparação. Cada recurso da linguagem será apresentado quando resolver uma necessidade física concreta:
+
+| Necessidade física | Recurso Python introduzido |
+|---|---|
+| representar uma grandeza | variáveis, números e unidades nos nomes |
+| repetir um cálculo | funções e argumentos |
+| armazenar medições | listas e arrays NumPy |
+| comparar grandezas | operações vetoriais e máscaras |
+| visualizar movimento | Matplotlib, eixos e séries |
+| desenhar forças | `quiver`, anotações e escala vetorial |
+| investigar parâmetros | laços, funções e gráficos comparativos |
+| validar modelos | testes, análise dimensional e resíduos |
+
+Todo bloco de código relevante deve ser explicado em três níveis: **o que o Python faz**, **o que isso representa fisicamente** e **como verificar se o resultado faz sentido**.
+
+## Padrão obrigatório para figuras
+
+- eixos identificados com grandeza e unidade;
+- título somente quando acrescentar informação não contida na legenda editorial;
+- legenda de séries quando houver mais de uma curva ou vetor;
+- proporção igual nos desenhos geométricos e vetoriais;
+- cores acompanhadas por rótulos, marcadores ou estilos de linha;
+- grade discreta quando auxiliar a leitura de valores;
+- caption numerada pelo Quarto e referência no texto;
+- resolução mínima de 150 dpi para imagens rasterizadas;
+- código capaz de reproduzir integralmente a figura.
+
 ## Organização planejada
 
 ### Parte I — Ferramentas para investigar a Física
@@ -96,4 +125,3 @@ Os laboratórios avançam em paralelo com a Física:
 - Citar fontes quando uma formulação histórica, conjunto de dados ou imagem externa for usado.
 - Registrar no Git a evolução autoral de texto, código e figuras.
 - Usar os volumes apenas para cobertura temática e diagnóstico de pré-requisitos.
-

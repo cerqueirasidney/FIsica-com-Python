@@ -21,6 +21,58 @@ velocidade_media = distancia / tempo
 print(f"Velocidade média: {velocidade_media:.1f} m/s")
 ```
 
+### O que o Python acabou de fazer?
+
+- `distancia = 120` cria uma variável e associa a ela um valor numérico.
+- O símbolo `#` inicia um comentário para leitores humanos.
+- `/` representa a divisão.
+- `print(...)` exibe o resultado.
+- A expressão `:.1f` pede uma casa decimal na apresentação do número.
+
+O Python não conhece unidades físicas automaticamente: ele calcula `120 / 10`. Cabe a nós manter unidades consistentes, documentá-las e interpretar o resultado como metros por segundo.
+
+## De cálculo isolado a função
+
+Quando uma relação será usada várias vezes, criamos uma função:
+
+```{python}
+def velocidade_media(deslocamento, intervalo_de_tempo):
+    """Calcula Δx/Δt usando unidades consistentes."""
+    if intervalo_de_tempo == 0:
+        raise ValueError("o intervalo de tempo deve ser diferente de zero")
+    return deslocamento / intervalo_de_tempo
+
+
+print(velocidade_media(120, 10))
+```
+
+A validação não é mero detalhe de programação: um intervalo de tempo nulo torna a razão indefinida também na Física.
+
+## Primeiro gráfico científico
+
+Um gráfico científico precisa informar o que cada eixo representa e quais unidades foram usadas.
+
+```{python}
+#| label: fig-primeiro-grafico
+#| fig-cap: "Posição de um móvel com velocidade constante de 12 m/s."
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+tempo = np.linspace(0, 10, 101)
+posicao = 12 * tempo
+
+fig, ax = plt.subplots()
+ax.plot(tempo, posicao, label="móvel A")
+ax.set_xlabel("tempo, t (s)")
+ax.set_ylabel("posição, x (m)")
+ax.grid(alpha=0.3)
+ax.legend()
+plt.show()
+```
+
+Na @fig-primeiro-grafico, a inclinação da reta informa quanto a posição aumenta a cada segundo. Ao longo do livro, toda figura será construída com esse mesmo cuidado: eixos, unidades, legenda e uma descrição do fenômeno representado.
+
 ## Um fluxo de investigação
 
 1. Definir o sistema e a pergunta.
@@ -29,4 +81,3 @@ print(f"Velocidade média: {velocidade_media:.1f} m/s")
 4. Implementar o modelo.
 5. Comparar previsões com dados ou casos conhecidos.
 6. Avaliar limitações e aperfeiçoar o modelo.
-

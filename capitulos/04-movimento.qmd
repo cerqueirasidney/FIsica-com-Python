@@ -25,6 +25,9 @@ x(t)=x_0+vt.
 $$
 
 ```{python}
+#| label: fig-movimento-uniforme
+#| fig-cap: "Posição em função do tempo para um movimento uniforme."
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -41,7 +44,7 @@ plt.legend()
 plt.show()
 ```
 
-O coeficiente angular do gráfico de posição por tempo corresponde à velocidade.
+Na @fig-movimento-uniforme, o coeficiente angular do gráfico de posição por tempo corresponde à velocidade.
 
 ## Derivada numérica
 
@@ -82,4 +85,3 @@ A expressão acima pressupõe aceleração constante. Ela descreve bem uma queda
 1. Faça `v` negativo no primeiro gráfico. Interprete a inclinação sem confundir posição negativa com velocidade negativa.
 2. Compare a derivada numérica com a velocidade analítica em um movimento uniformemente acelerado.
 3. Crie dados de posição com um pequeno ruído aleatório e observe seu efeito sobre `np.gradient`.
-
