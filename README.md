@@ -6,6 +6,8 @@ Projeto de livro didático que combina conceitos de Física, modelagem matemáti
 
 Construir uma introdução prática à Física usando simulações, gráficos e experimentos computacionais reproduzíveis.
 
+O projeto cobre a progressão de uma coleção ampla de Física preparatória, mas possui texto, exemplos, exercícios e códigos próprios. A [arquitetura editorial](planejamento/arquitetura.md) registra o plano dos 36 capítulos e as regras de originalidade.
+
 ## Estrutura inicial
 
 - `index.qmd`: apresentação do livro;
@@ -13,6 +15,8 @@ Construir uma introdução prática à Física usando simulações, gráficos e 
 - `capitulos/`: texto principal;
 - `exercicios/`: listas de problemas;
 - `codigo/`: scripts Python reutilizáveis;
+- `testes/`: verificações automáticas dos modelos;
+- `planejamento/`: arquitetura e critérios editoriais;
 - `referencias.bib`: bibliografia;
 - `_quarto.yml`: organização e configuração do livro.
 
@@ -31,6 +35,12 @@ py -m pip install -r requirements.txt
 
 ```powershell
 quarto preview
+```
+
+Para verificar os módulos Python sem instalar bibliotecas adicionais:
+
+```powershell
+py -m unittest discover -s testes
 ```
 
 ## Licença

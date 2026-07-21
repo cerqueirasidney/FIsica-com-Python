@@ -12,10 +12,14 @@ book:
   chapters:
     - index.qmd
     - prefacio.qmd
-    - part: "Fundamentos"
+    - part: "Parte I — Ferramentas para investigar a Física"
       chapters:
         - capitulos/01-introducao.qmd
-        - capitulos/02-movimento.qmd
+        - capitulos/02-medidas-incertezas.qmd
+        - capitulos/03-vetores.qmd
+    - part: "Parte II — Mecânica"
+      chapters:
+        - capitulos/04-movimento.qmd
     - part: "Atividades"
       chapters:
         - exercicios/01-exercicios.qmd
@@ -35,4 +39,4 @@ format:
 execute:
   freeze: auto
   warning: false
-
+  error: true

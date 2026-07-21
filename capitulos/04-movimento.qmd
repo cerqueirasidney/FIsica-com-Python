@@ -1,0 +1,85 @@
+# Movimento em uma dimensão
+
+## Descrever antes de explicar
+
+A cinemática descreve como a posição muda sem perguntar, por enquanto, quais forças causam o movimento. Para isso precisamos definir um referencial, uma origem, um eixo e um relógio.
+
+A velocidade média entre $t_1$ e $t_2$ é
+
+$$
+v_m=\frac{x(t_2)-x(t_1)}{t_2-t_1}.
+$$
+
+Quando o intervalo se torna muito pequeno, chegamos à velocidade instantânea:
+
+$$
+v(t)=\frac{dx}{dt}.
+$$
+
+## Movimento com velocidade constante
+
+Se $v$ não varia,
+
+$$
+x(t)=x_0+vt.
+$$
+
+```{python}
+import matplotlib.pyplot as plt
+import numpy as np
+
+x0 = 2.0  # m
+v = 3.0   # m/s
+t = np.linspace(0, 10, 101)
+x = x0 + v * t
+
+plt.plot(t, x, label=f"x(t) = {x0:g} + {v:g}t")
+plt.xlabel("tempo (s)")
+plt.ylabel("posição (m)")
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+O coeficiente angular do gráfico de posição por tempo corresponde à velocidade.
+
+## Derivada numérica
+
+Dados experimentais chegam como uma sequência de pontos, não como uma função pronta para derivar. Podemos estimar a velocidade com diferenças finitas.
+
+```{python}
+velocidade_estimada = np.gradient(x, t)
+print(f"velocidade média estimada: {velocidade_estimada.mean():.3f} m/s")
+```
+
+Para dados reais, ruído na posição pode ser amplificado pela derivação. Esse efeito será estudado no capítulo sobre análise de dados.
+
+## Aceleração constante
+
+Para aceleração constante $a$,
+
+$$
+v(t)=v_0+at,
+$$
+
+$$
+x(t)=x_0+v_0t+\frac{1}{2}at^2.
+$$
+
+```{python}
+from codigo.cinematica import estado_mruv
+
+x, v = estado_mruv(t=4.0, x0=1.0, v0=2.0, a=-0.5)
+print(f"x = {x:.2f} m; v = {v:.2f} m/s")
+```
+
+## Limites do modelo
+
+A expressão acima pressupõe aceleração constante. Ela descreve bem uma queda livre próxima à superfície terrestre quando a resistência do ar é desprezível, mas não uma queda longa com arrasto significativo.
+
+## Para investigar
+
+1. Faça `v` negativo no primeiro gráfico. Interprete a inclinação sem confundir posição negativa com velocidade negativa.
+2. Compare a derivada numérica com a velocidade analítica em um movimento uniformemente acelerado.
+3. Crie dados de posição com um pequeno ruído aleatório e observe seu efeito sobre `np.gradient`.
+

@@ -1,0 +1,72 @@
+# Vetores e geometria computacional
+
+## Grandezas com direção
+
+Massa e temperatura são descritas por um valor e uma unidade. Deslocamento, velocidade e força também exigem direção e sentido; são grandezas vetoriais.
+
+No plano cartesiano, escrevemos
+
+$$
+\vec{A}=A_x\hat{\imath}+A_y\hat{\jmath}.
+$$
+
+Seu módulo é obtido pelo teorema de Pitágoras:
+
+$$
+|\vec{A}|=\sqrt{A_x^2+A_y^2}.
+$$
+
+## Operações com NumPy
+
+```{python}
+import numpy as np
+
+a = np.array([3.0, 4.0])
+b = np.array([-1.0, 2.0])
+
+print("a + b =", a + b)
+print("|a| =", np.linalg.norm(a))
+print("a · b =", np.dot(a, b))
+```
+
+O produto escalar também pode ser escrito como
+
+$$
+\vec{A}\cdot\vec{B}=|\vec{A}||\vec{B}|\cos\theta.
+$$
+
+Logo, ele permite encontrar o ângulo entre vetores. Por causa de erros de arredondamento, convém limitar numericamente o cosseno ao intervalo $[-1,1]$.
+
+```{python}
+cos_theta = np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+theta = np.degrees(np.arccos(np.clip(cos_theta, -1.0, 1.0)))
+print(f"ângulo = {theta:.1f}°")
+```
+
+## Visualização
+
+```{python}
+import matplotlib.pyplot as plt
+
+origem = np.zeros(2)
+for vetor, cor, nome in [(a, "tab:blue", "a"), (b, "tab:orange", "b"),
+                         (a + b, "tab:green", "a+b")]:
+    plt.quiver(*origem, *vetor, angles="xy", scale_units="xy", scale=1,
+               color=cor, label=nome)
+
+plt.axhline(0, color="black", linewidth=0.6)
+plt.axvline(0, color="black", linewidth=0.6)
+plt.axis("equal")
+plt.xlim(-2, 5)
+plt.ylim(-1, 7)
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+## Para investigar
+
+1. Construa dois vetores perpendiculares cujo módulo seja diferente de 1 e confirme numericamente que o produto escalar é zero.
+2. Represente uma força de $50\,\text{N}$ formando $35°$ com a horizontal por suas componentes cartesianas.
+3. O que acontece com o cálculo do ângulo se um dos vetores for nulo? Proponha uma validação para o código.
+

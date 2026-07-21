@@ -1,0 +1,84 @@
+# Medidas, unidades e incertezas
+
+## Uma medida nunca é apenas um número
+
+Imagine que três pessoas meçam o período de um pêndulo usando o cronômetro de um celular. Mesmo com cuidado, os valores não serão idênticos. O tempo de reação, a resolução do instrumento e pequenas mudanças na soltura produzem variações.
+
+Por isso, uma medida deve comunicar pelo menos três elementos:
+
+$$
+T = (1{,}84 \pm 0{,}03)\,\text{s}.
+$$
+
+Aqui aparecem o valor estimado, a incerteza e a unidade. Sem esses elementos, não sabemos com que precisão a grandeza foi determinada.
+
+## Média e dispersão
+
+Para $n$ medições $x_1,x_2,\ldots,x_n$, a média aritmética é
+
+$$
+\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i.
+$$
+
+Uma estimativa simples da dispersão é o desvio-padrão amostral:
+
+$$
+s=\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}.
+$$
+
+O desvio-padrão descreve a variabilidade das observações; ele não substitui uma análise das limitações do instrumento ou do procedimento.
+
+## Laboratório Python: período de um pêndulo
+
+O conjunto abaixo é fictício e foi criado para este livro.
+
+```{python}
+import numpy as np
+
+periodos = np.array([1.82, 1.87, 1.85, 1.80, 1.86, 1.83, 1.88, 1.84])
+media = np.mean(periodos)
+desvio = np.std(periodos, ddof=1)
+erro_da_media = desvio / np.sqrt(periodos.size)
+
+print(f"média = {media:.3f} s")
+print(f"desvio-padrão = {desvio:.3f} s")
+print(f"incerteza estatística da média = {erro_da_media:.3f} s")
+```
+
+O parâmetro `ddof=1` faz o NumPy usar $n-1$ no denominador, como na definição amostral.
+
+## Propagação em uma função
+
+Para pequenas incertezas independentes, se $y=f(a,b)$, uma aproximação comum é
+
+$$
+\sigma_y^2 \approx
+\left(\frac{\partial f}{\partial a}\sigma_a\right)^2+
+\left(\frac{\partial f}{\partial b}\sigma_b\right)^2.
+$$
+
+Se $v=d/t$, então
+
+$$
+\sigma_v \approx v\sqrt{\left(\frac{\sigma_d}{d}\right)^2+
+\left(\frac{\sigma_t}{t}\right)^2}.
+$$
+
+Essa expressão será comparada mais adiante com uma simulação de Monte Carlo.
+
+## Verificação dimensional
+
+Uma equação fisicamente válida deve ser dimensionalmente homogênea. Em
+
+$$
+x=x_0+v_0t+\frac{1}{2}at^2,
+$$
+
+os quatro termos possuem dimensão de comprimento. A análise dimensional detecta muitos erros algébricos, embora não determine constantes adimensionais como $1/2$.
+
+## Para investigar
+
+1. Acrescente aos dados uma medida de $2{,}40\,\text{s}$. Compare média e mediana antes e depois.
+2. Explique por que repetir uma medição reduz a incerteza estatística, mas não corrige automaticamente um cronômetro descalibrado.
+3. Implemente a incerteza de $v=d/t$ para $d=(12{,}0\pm0{,}1)\,\text{m}$ e $t=(3{,}2\pm0{,}1)\,\text{s}$.
+
