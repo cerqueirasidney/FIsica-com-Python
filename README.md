@@ -37,6 +37,18 @@ py -m pip install -r requirements.txt
 quarto preview
 ```
 
+## Começando do zero
+
+No Windows, execute o menu de aulas:
+
+```powershell
+.\iniciar_estudos.cmd
+```
+
+Você também pode dar duplo clique em `iniciar_estudos.cmd`. O lançador não modifica permanentemente a política de segurança do PowerShell.
+
+Ou siga as instruções das [aulas executáveis](aulas/README.md). Elas começam por variáveis e operações e avançam gradualmente para gráficos, vetores e movimento.
+
 Para verificar os módulos Python sem instalar bibliotecas adicionais:
 
 ```powershell
