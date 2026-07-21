@@ -1,0 +1,38 @@
+project:
+  type: book
+  output-dir: _book
+
+lang: pt-BR
+
+book:
+  title: "Física com Python"
+  subtitle: "Aprendendo Física por meio de modelos e simulações"
+  author: "Sidney Cerqueira"
+  date: today
+  chapters:
+    - index.qmd
+    - prefacio.qmd
+    - part: "Fundamentos"
+      chapters:
+        - capitulos/01-introducao.qmd
+        - capitulos/02-movimento.qmd
+    - part: "Atividades"
+      chapters:
+        - exercicios/01-exercicios.qmd
+    - referencias.qmd
+
+bibliography: referencias.bib
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true
+    code-fold: false
+  pdf:
+    documentclass: scrreprt
+
+execute:
+  freeze: auto
+  warning: false
+

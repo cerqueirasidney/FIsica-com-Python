@@ -1,0 +1,13 @@
+# Exercícios iniciais
+
+1. Um ciclista percorre $450\,\text{m}$ em $30\,\text{s}$. Calcule a velocidade escalar média em m/s e km/h.
+
+2. Escreva um programa que receba distância e tempo e devolva a velocidade média. Inclua uma verificação para impedir divisão por zero.
+
+3. Para $x_0 = 10\,\text{m}$ e $v = -2\,\text{m/s}$:
+   a. determine a posição em $t=3\,\text{s}$;
+   b. encontre o instante em que o móvel passa pela origem;
+   c. construa o gráfico entre 0 e 8 segundos.
+
+4. Explique por que um modelo pode produzir resultados matematicamente corretos e, ainda assim, não representar adequadamente um fenômeno real.
+

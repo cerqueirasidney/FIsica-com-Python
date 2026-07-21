@@ -1,0 +1,32 @@
+# Física, modelos e Python
+
+## O que é um modelo físico?
+
+Um modelo físico é uma representação simplificada de um fenômeno. Ele seleciona as características relevantes do sistema e expressa relações entre grandezas por meio de conceitos, equações e condições iniciais.
+
+Todo modelo possui limites. Uma partícula pontual, por exemplo, descreve bem o movimento de um objeto quando suas dimensões não influenciam o problema.
+
+## Primeiro cálculo
+
+Considere um móvel que percorre uma distância $\Delta s = 120\,\text{m}$ em um intervalo $\Delta t = 10\,\text{s}$. Sua velocidade escalar média é
+
+$$
+v_m = \frac{\Delta s}{\Delta t} = 12\,\text{m/s}.
+$$
+
+```{python}
+distancia = 120  # metros
+tempo = 10       # segundos
+velocidade_media = distancia / tempo
+print(f"Velocidade média: {velocidade_media:.1f} m/s")
+```
+
+## Um fluxo de investigação
+
+1. Definir o sistema e a pergunta.
+2. Identificar grandezas e unidades.
+3. Propor um modelo e explicitar hipóteses.
+4. Implementar o modelo.
+5. Comparar previsões com dados ou casos conhecidos.
+6. Avaliar limitações e aperfeiçoar o modelo.
+

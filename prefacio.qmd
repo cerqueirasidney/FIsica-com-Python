@@ -1,0 +1,14 @@
+# Prefácio {.unnumbered}
+
+## Para quem é este livro
+
+Este material é destinado a estudantes, professores e pessoas curiosas que desejam estudar Física e aprender a usar Python como ferramenta científica.
+
+## Como estudar
+
+Leia cada seção com um ambiente Python disponível. Antes de executar um exemplo, tente prever o resultado; depois, altere parâmetros e observe como o modelo responde.
+
+## Convenções
+
+As grandezas serão apresentadas preferencialmente no Sistema Internacional de Unidades (SI). Os exemplos computacionais usarão Python 3 e bibliotecas científicas amplamente adotadas.
+
