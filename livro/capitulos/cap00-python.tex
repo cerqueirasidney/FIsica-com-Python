@@ -246,6 +246,230 @@ import matplotlib.pyplot as plt
 
 Os nomes \texttt{np} e \texttt{plt} são convenções amplamente utilizadas. Eles são aliases: nomes abreviados associados aos módulos importados.
 
+\section{Arquivos, pastas e caminhos com pathlib}
+\label{sec:pathlib}
+
+Os programas que produzem gráficos precisam informar onde os arquivos serão guardados. Um caminho completo preso a uma pasta pessoal faria o código funcionar apenas naquela organização. Para criar caminhos portáteis, usaremos a classe \texttt{Path}, pertencente ao módulo \texttt{pathlib} da biblioteca padrão do Python.
+
+\begin{lstlisting}
+from pathlib import Path
+
+pasta_atual = Path.cwd()
+print(pasta_atual)
+\end{lstlisting}
+
+O método \texttt{Path.cwd()} informa a \textbf{pasta de trabalho atual}: o local a partir do qual o programa está sendo executado. A saída depende do computador e da pasta aberta no terminal. No Windows, ela poderia ser
+
+\begin{lstlisting}[style=saidaesperada]
+C:\Users\ana\FisicaComPython\livro
+\end{lstlisting}
+
+No Linux ou no Google Colab, o mesmo comando pode produzir algo como
+
+\begin{lstlisting}[style=saidaesperada]
+/home/ana/FisicaComPython/livro
+\end{lstlisting}
+
+Essas diferenças não exigem alterações no restante do programa. Em vez de escrever manualmente barras próprias de cada sistema, o operador \texttt{/} combina partes de um caminho:
+
+\begin{lstlisting}
+pasta_figuras = Path("figuras") / "cap00"
+arquivo = pasta_figuras / "meu-grafico.pdf"
+\end{lstlisting}
+
+Como o caminho começa com \texttt{figuras} e não com uma unidade de disco ou uma barra inicial, ele é \textbf{relativo}. Se a pasta de trabalho for \texttt{livro}, o arquivo ficará em \texttt{livro/figuras/cap00/meu-grafico.pdf}. O método \texttt{resolve} permite visualizar o caminho completo calculado no computador:
+
+\begin{lstlisting}
+print(arquivo.resolve())
+\end{lstlisting}
+
+Antes de salvar, precisamos garantir que a pasta exista:
+
+\begin{lstlisting}
+pasta_figuras.mkdir(parents=True, exist_ok=True)
+\end{lstlisting}
+
+O argumento \texttt{parents=True} autoriza a criação de pastas intermediárias; \texttt{exist\_ok=True} evita um erro quando a pasta já existe. A sequência portátil que adotaremos será, portanto,
+
+\begin{lstlisting}
+from pathlib import Path
+
+pasta_figuras = Path("figuras") / "cap00"
+pasta_figuras.mkdir(parents=True, exist_ok=True)
+arquivo = pasta_figuras / "meu-grafico.pdf"
+\end{lstlisting}
+
+Nos códigos oficiais deste livro, o terminal será aberto na pasta \texttt{livro}. Por exemplo,
+
+\begin{lstlisting}[language={},numbers=none]
+python codigos/cap00/primeiro_grafico.py
+\end{lstlisting}
+
+Assim, os programas guardam os resultados na pasta \texttt{figuras}, dentro de \texttt{livro}.
+
+Se o leitor copiar um script para outro projeto, a mesma instrução criará a pasta \texttt{figuras} no novo local de execução.
+
+Também existe a variável especial \lstinline|__file__|, que informa o arquivo do script. Ela pode ser útil em projetos com estruturas rígidas, mas não está disponível da mesma forma em todos os notebooks. Por isso, os exemplos introdutórios usarão caminhos relativos à pasta de trabalho. No VS Code, no JupyterLab e no Colab, o leitor deve conferir \texttt{Path.cwd()} quando tiver dúvida sobre o destino de um arquivo.
+
+\section{Primeiros gráficos com Matplotlib}
+\label{sec:primeiros-graficos}
+
+Um gráfico científico não é apenas uma ilustração: ele representa a relação entre grandezas. Antes de interpretar curvas de posição, velocidade, energia ou campo, precisamos compreender como os dados são convertidos em elementos visuais e como esses elementos são construídos em Python.
+
+Usaremos o módulo \texttt{matplotlib.pyplot}, importado com o alias \texttt{plt}. A biblioteca Matplotlib organiza um gráfico em dois objetos principais:
+
+\begin{description}
+  \item[Figura (\texttt{fig}):] a área completa que será exibida ou salva, como uma folha que pode conter um ou mais gráficos;
+  \item[Eixos (\texttt{ax}):] a região em que os dados são desenhados, incluindo os eixos coordenados, marcas, rótulos e curvas.
+\end{description}
+
+Essa distinção explica a instrução
+
+\begin{lstlisting}
+fig, ax = plt.subplots()
+\end{lstlisting}
+
+A função \texttt{plt.subplots} cria a figura e um sistema de eixos. Os nomes \texttt{fig} e \texttt{ax} são convenções, não palavras reservadas do Python.
+
+\subsection{Um primeiro gráfico a partir de dados}
+
+Considere posições medidas a cada segundo. Duas listas armazenam os valores correspondentes de tempo e posição. O primeiro elemento de \texttt{tempo} é associado ao primeiro elemento de \texttt{posicao}, e assim sucessivamente.
+
+\lstinputlisting[
+  caption={Primeiro gráfico construído a partir de dados de posição e tempo.},
+  label={cod:primeiro-grafico}
+]{codigos/cap00/primeiro_grafico.py}
+
+A saída textual esperada é
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do primeiro programa gráfico.}
+]{codigos/cap00/saidas/primeiro_grafico.txt}
+
+O arquivo produzido pelo programa é mostrado na \cref{fig:primeiro-grafico}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.78\textwidth]{cap00/primeiro-grafico.pdf}
+  \caption{Posição em função do tempo. Os círculos identificam os dados fornecidos ao programa e os segmentos apenas orientam a leitura entre eles.}
+  \label{fig:primeiro-grafico}
+\end{figure}
+
+No \cref{cod:primeiro-grafico}:
+
+\begin{itemize}
+  \item \texttt{ax.plot(tempo, posicao)} associa os valores da primeira sequência ao eixo horizontal e os da segunda ao eixo vertical;
+  \item o argumento \texttt{marker="o"} marca cada par de dados com um círculo;
+  \item \texttt{set\_xlabel} e \texttt{set\_ylabel} identificam as grandezas e suas unidades;
+  \item \texttt{set\_title} acrescenta um título descritivo;
+  \item \texttt{tight\_layout} ajusta os espaços para evitar cortes nos rótulos;
+  \item \texttt{savefig} salva a figura, enquanto \texttt{plt.close} libera a memória usada por ela.
+\end{itemize}
+
+Durante uma exploração interativa, \texttt{plt.show()} pode ser usado para abrir a figura em uma janela ou exibi-la em um notebook. Nos scripts do livro, preferimos \texttt{savefig}: o resultado fica registrado, pode ser reproduzido e pode ser inserido no texto. O formato PDF preserva linhas e letras como elementos vetoriais, adequados à impressão.
+
+\subsection{Amostragem de um intervalo com NumPy}
+
+Listas são suficientes para armazenar uma pequena quantidade de dados experimentais. Para representar uma curva, calculamos a função em muitos pontos.
+
+Por exemplo,
+
+\begin{lstlisting}
+tempo = np.linspace(0, 5, 101)
+\end{lstlisting}
+
+cria um array NumPy com 101 valores igualmente espaçados, incluindo \num{0} e \num{5}. Um \emph{array} é uma estrutura numérica que permite aplicar uma operação a todos os seus elementos. Assim,
+
+\begin{lstlisting}
+posicao = 2.0 * tempo
+\end{lstlisting}
+
+calcula uma posição para cada instante sem escrever um laço explicitamente. O conjunto de valores escolhidos para a variável independente é o \textbf{domínio amostrado}. A curva exibida é formada por segmentos entre os pontos calculados; ela não contém infinitos pontos. Aumentar a amostragem pode tornar a curva mais suave, mas não corrige um modelo físico inadequado.
+
+\subsection{Eixos, estilos, legenda, grade e anotação}
+
+Quando duas ou mais curvas aparecem nos mesmos eixos, cada uma precisa ser identificável também em impressão sem cores. Para isso, combinamos rótulos com estilos de linha diferentes.
+
+\lstinputlisting[
+  caption={Elementos essenciais de um gráfico científico.},
+  label={cod:elementos-grafico}
+]{codigos/cap00/elementos_grafico.py}
+
+A saída esperada é
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa com duas curvas.}
+]{codigos/cap00/saidas/elementos_grafico.txt}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\textwidth]{cap00/elementos-grafico.pdf}
+  \caption{Dois movimentos apresentados nos mesmos eixos. Cor, estilo de linha, legenda e anotação trabalham juntos para comunicar a informação.}
+  \label{fig:elementos-grafico}
+\end{figure}
+
+Os novos comandos controlam diferentes partes da comunicação visual:
+
+\begin{description}
+  \item[\texttt{color}:] escolhe a cor da curva;
+  \item[\texttt{linestyle}:] define o estilo, como linha contínua ou tracejada;
+  \item[\texttt{label}:] associa um texto à curva;
+  \item[\texttt{legend}:] exibe os textos associados às curvas;
+  \item[\texttt{set\_xlim} e \texttt{set\_ylim}:] definem os limites visíveis dos eixos;
+  \item[\texttt{grid}:] acrescenta linhas de referência; o parâmetro \texttt{alpha} controla sua transparência;
+  \item[\texttt{annotate}:] relaciona uma observação a um ponto do gráfico. O argumento \texttt{xy} indica o ponto e \texttt{xytext} indica a posição do texto.
+\end{description}
+
+Limites de eixos devem ser escolhidos com critério. Cortar parte da escala pode destacar uma variação pequena, mas também pode exagerar visualmente diferenças. Uma grade deve ajudar na leitura, não competir com os dados. Uma legenda é necessária quando há várias curvas sem identificação direta; em uma curva única, bons rótulos de eixos e uma legenda de figura geralmente bastam.
+
+\subsection{Mais de um sistema de eixos}
+
+A função \texttt{plt.subplots} também cria vários gráficos na mesma figura:
+
+\begin{lstlisting}
+fig, eixos = plt.subplots(1, 2)
+eixos[0].plot(x, y_1)
+eixos[1].plot(x, y_2)
+\end{lstlisting}
+
+Os argumentos \texttt{1, 2} especificam uma linha e duas colunas. Nesse caso, \texttt{eixos} é uma coleção: \texttt{eixos[0]} seleciona o primeiro sistema de eixos e \texttt{eixos[1]}, o segundo. Esse recurso será usado quando a comparação lado a lado for mais clara do que sobrepor muitas curvas.
+
+\subsection{Linhas de referência, marcas, proporção e formas}
+
+Alguns gráficos exigem mais do que curvas. Os comandos a seguir serão úteis na trigonometria e na representação de vetores:
+
+\begin{lstlisting}
+ax.axhline(0)                  # linha horizontal em y = 0
+ax.axvline(0)                  # linha vertical em x = 0
+ax.set_xticks([0, 1, 2])       # posições das marcas
+ax.set_aspect("equal")         # mesma escala visual nos eixos
+circulo = plt.Circle((0, 0), 1, fill=False)
+ax.add_patch(circulo)          # adiciona a forma aos eixos
+ax.quiver(0, 0, 1, 1)         # seta de (0, 0) até (1, 1)
+\end{lstlisting}
+
+Os métodos \texttt{axhline} e \texttt{axvline} criam linhas de referência paralelas aos eixos. O método \texttt{set\_xticks} controla onde aparecem as marcas do eixo horizontal; um segundo argumento opcional pode fornecer textos personalizados, como $\pi/2$ e $\pi$. O ajuste \texttt{set\_aspect("equal")} faz uma unidade horizontal ocupar o mesmo comprimento visual que uma unidade vertical, condição necessária para que um círculo não pareça uma elipse.
+
+Uma \texttt{Circle} é uma forma geométrica que só passa a pertencer ao gráfico depois de ser entregue a \texttt{add\_patch}. O método \texttt{quiver} desenha setas e será estudado com mais profundidade quando representarmos vetores. Por enquanto, basta observar que os dois primeiros números indicam a origem e os dois últimos, as componentes da seta.
+
+Textos matemáticos podem ser escritos entre sinais de dólar. Usaremos frequentemente strings como \lstinline|r"$\sin(\theta)$"|. O prefixo \texttt{r} cria uma \emph{raw string}, na qual as barras invertidas são preservadas para a notação matemática do Matplotlib.
+
+\subsection{Critérios para um gráfico científico}
+
+Nem todo cálculo precisa de um gráfico. Ele é útil quando a forma, a tendência, a comparação ou a variação entre grandezas acrescenta informação. Quando for usado, verificaremos se:
+
+\begin{enumerate}
+  \item os eixos identificam grandezas e unidades;
+  \item o domínio e os limites correspondem ao problema físico;
+  \item curvas diferentes podem ser distinguidas sem depender apenas de cor;
+  \item a legenda existe somente quando necessária;
+  \item a quantidade de pontos representa adequadamente a função ou os dados;
+  \item título, grade e anotações ajudam a leitura sem criar excesso visual;
+  \item o arquivo foi salvo com resolução ou formato apropriado.
+\end{enumerate}
+
 \section{Ambiente virtual e dependências}
 
 Um ambiente virtual isola o interpretador e as bibliotecas de um projeto. Assim, projetos diferentes podem utilizar versões diferentes de uma mesma biblioteca sem interferência entre si.

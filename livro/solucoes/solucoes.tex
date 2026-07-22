@@ -1,9 +1,242 @@
 \chapter{Resoluções das atividades propostas}
 \label{cap:solucoes}
 
-As resoluções são organizadas por capítulo e mantêm a mesma numeração dos exercícios no texto principal. Elas serão incorporadas após o fechamento editorial de cada capítulo.
+\setcounter{equation}{0}
+\renewcommand{\theequation}{S.\arabic{equation}}
+\newcounter{solucaolistingbase}
+\setcounter{solucaolistingbase}{\value{lstlisting}}
+\renewcommand{\thelstlisting}{S.\number\numexpr
+  \value{lstlisting}-\value{solucaolistingbase}\relax}
+
+As resoluções são organizadas por capítulo e mantêm a numeração dos exercícios no texto principal. Em cada solução, o desenvolvimento matemático precede a substituição numérica. O Python é usado como verificação quando acrescenta valor ao raciocínio.
 
 \section*{Capítulo 1 — Ferramentas matemáticas para a Física}
 \addcontentsline{toc}{section}{Capítulo 1 — Ferramentas matemáticas para a Física}
 
-As resoluções do Capítulo 1 serão inseridas após a aprovação de todos os seus enunciados.
+\subsection*{Exercício 1}
+
+Para escrever o diâmetro em notação científica, deslocamos a vírgula sete posições para a direita:
+
+\begin{equation}
+  \SI{0.00000032}{\meter}
+  =\SI{3.2e-7}{\meter}.
+\end{equation}
+
+Como \(\SI{1}{\meter}=\SI{1e9}{\nano\meter}\), multiplicamos o valor em metros por \(10^9\):
+
+\begin{equation}
+  (3{,}2\times10^{-7}\,\si{\meter})
+  \left(10^9\,\frac{\si{\nano\meter}}{\si{\meter}}\right)
+  =3{,}2\times10^2\,\si{\nano\meter}
+  =\SI{320}{\nano\meter}.
+\end{equation}
+
+Portanto, o diâmetro é \(\boxed{\SI{3.2e-7}{\meter}=\SI{320}{\nano\meter}}\).
+
+\subsection*{Exercício 2}
+
+Se a energia \(E\) é proporcional a \(q^2\), podemos escrever \(E=Cq^2\), onde \(C\) permanece constante. Ao substituir \(q\) por \(3q\), obtemos
+
+\begin{equation}
+  E'=C(3q)^2=9Cq^2=9E.
+\end{equation}
+
+Logo, a energia é \(\boxed{9}\) vezes maior.
+
+\subsection*{Exercício 3}
+
+Para uma intensidade \(I\) inversamente proporcional a \(r^2\), temos \(I=C/r^2\). Assim,
+
+\begin{equation}
+  \frac{I(\SI{2}{\meter})}{I(\SI{6}{\meter})}
+  =\frac{C/2^2}{C/6^2}
+  =\frac{6^2}{2^2}
+  =9.
+\end{equation}
+
+A intensidade a \(\SI{2}{\meter}\) é, portanto, \(\boxed{9}\) vezes a intensidade a \(\SI{6}{\meter}\). Equivalentemente, \(I(\SI{6}{\meter})=I(\SI{2}{\meter})/9\).
+
+\subsection*{Exercício 4}
+
+Tomando o ângulo a partir do eixo horizontal,
+
+\begin{align}
+  F_x &= F\cos\theta
+       =\SI{120}{\newton}\cos 40^\circ
+       \approx\SI{91.9}{\newton},\\
+  F_y &= F\sin\theta
+       =\SI{120}{\newton}\sin 40^\circ
+       \approx\SI{77.1}{\newton}.
+\end{align}
+
+As duas componentes são positivas porque o vetor está no primeiro quadrante. Portanto,
+
+\begin{equation}
+  \boxed{\vetor{F}\approx
+  (\SI{91.9}{\newton})\,\hat{\vetor{\imath}}
+  +(\SI{77.1}{\newton})\,\hat{\vetor{\jmath}}}.
+\end{equation}
+
+Como verificação, \(\sqrt{F_x^2+F_y^2}\approx\SI{120}{\newton}\).
+
+\subsection*{Exercício 5}
+
+Para converter graus em radianos, multiplicamos por \(\pi/180^\circ\):
+
+\begin{equation}
+  150^\circ\frac{\pi\,\si{\radian}}{180^\circ}
+  =\boxed{\frac{5\pi}{6}\,\si{\radian}}.
+\end{equation}
+
+No sentido inverso,
+
+\begin{equation}
+  \frac{5\pi}{6}\,\si{\radian}
+  \frac{180^\circ}{\pi\,\si{\radian}}
+  =\boxed{150^\circ}.
+\end{equation}
+
+Os resultados são consistentes porque as duas expressões representam o mesmo ângulo.
+
+\subsection*{Exercício 6}
+
+A velocidade é a derivada da posição em relação ao tempo:
+
+\begin{equation}
+  v(t)=\frac{\dd x}{\dd t}=2-6t.
+\end{equation}
+
+A aceleração é a derivada da velocidade:
+
+\begin{equation}
+  a(t)=\frac{\dd v}{\dd t}=-6.
+\end{equation}
+
+Se \(x\) é medido em metros e \(t\) em segundos, cada termo de \(x(t)\) precisa ter unidade de comprimento. Portanto, o termo constante \(4\) tem unidade de metro, o coeficiente \(2\) tem unidade de \(\si{\meter\per\second}\), e o coeficiente \(-3\) tem unidade de \(\si{\meter\per\second\squared}\). Assim,
+
+\begin{align}
+  v(t)&=\boxed{(2-6t)\,\si{\meter\per\second}},\\
+  a(t)&=\boxed{-6\,\si{\meter\per\second\squared}}.
+\end{align}
+
+Na primeira expressão, os números carregam as unidades necessárias para que ambos os termos representem velocidade.
+
+\subsection*{Exercício 7}
+
+O deslocamento é a integral da velocidade:
+
+\begin{align}
+  \Delta x
+  &=\int_0^4(5-2t)\,\dd t\\
+  &=\left[5t-t^2\right]_0^4\\
+  &=20-16\\
+  &=\boxed{\SI{4}{\meter}}.
+\end{align}
+
+No gráfico \(v\times t\), a velocidade se anula em \(t=\SI{2.5}{\second}\). Entre \(0\) e \(\SI{2.5}{\second}\), a área triangular positiva vale
+
+\begin{equation}
+  A_+=\frac{1}{2}(\SI{2.5}{\second})(\SI{5}{\meter\per\second})
+  =\SI{6.25}{\meter}.
+\end{equation}
+
+Entre \(\SI{2.5}{\second}\) e \(\SI{4}{\second}\), a região fica abaixo do eixo e contribui com
+
+\begin{equation}
+  A_-=-\frac{1}{2}(\SI{1.5}{\second})(\SI{3}{\meter\per\second})
+  =-\SI{2.25}{\meter}.
+\end{equation}
+
+Logo, \(\Delta x=A_++A_-=\SI{4}{\meter}\). O sinal positivo indica que, apesar da inversão do movimento após \(\SI{2.5}{\second}\), o deslocamento no sentido positivo foi maior.
+
+\subsection*{Exercício 8}
+
+Os pontos críticos de uma função diferenciável ocorrem onde \(f'(x)=0\). Para
+
+\begin{equation}
+  f(x)=x^3-6x^2+9x+2,
+\end{equation}
+
+temos
+
+\begin{equation}
+  f'(x)=3x^2-12x+9=3(x-1)(x-3).
+\end{equation}
+
+Portanto, os valores críticos são \(x=1\) e \(x=3\). A segunda derivada é
+
+\begin{equation}
+  f''(x)=6x-12.
+\end{equation}
+
+Em \(x=1\), \(f''(1)=-6<0\), logo há um máximo local. Como \(f(1)=6\), o ponto é \(\boxed{(1,6)}\).
+
+Em \(x=3\), \(f''(3)=6>0\), logo há um mínimo local. Como \(f(3)=2\), o ponto é \(\boxed{(3,2)}\).
+
+\subsection*{Exercício 9}
+
+Definimos o excesso de temperatura em relação ao ambiente como
+
+\begin{equation}
+  \Theta(t)=T(t)-T_{\mathrm{amb}}
+  =\Delta T_0\e^{-t/\tau}.
+\end{equation}
+
+Derivando em relação ao tempo,
+
+\begin{align}
+  \frac{\dd\Theta}{\dd t}
+  &=-\frac{\Delta T_0}{\tau}\e^{-t/\tau}\\
+  &=-\frac{1}{\tau}\Theta.
+\end{align}
+
+Como \(\Theta=T-T_{\mathrm{amb}}\), concluímos que
+
+\begin{equation}
+  \boxed{\frac{\dd}{\dd t}(T-T_{\mathrm{amb}})
+  =-\frac{1}{\tau}(T-T_{\mathrm{amb}})}.
+\end{equation}
+
+A taxa é proporcional ao próprio excesso de temperatura. O sinal negativo indica que, para um corpo inicialmente mais quente que o ambiente, o excesso diminui com o tempo.
+
+\subsection*{Exercício 10}
+
+A inclinação da reta posição-tempo é
+
+\begin{equation}
+  v=\frac{\Delta x}{\Delta t}
+  =\frac{\SI{25}{\meter}-\SI{7}{\meter}}
+         {\SI{8}{\second}-\SI{2}{\second}}
+  =\boxed{\SI{3}{\meter\per\second}}.
+\end{equation}
+
+Essa inclinação representa a velocidade constante. Escrevendo a posição como \(x(t)=x_0+vt\) e usando o ponto \((\SI{2}{\second},\SI{7}{\meter})\), obtemos
+
+\begin{equation}
+  \SI{7}{\meter}=x_0+
+  (\SI{3}{\meter\per\second})(\SI{2}{\second}),
+\end{equation}
+
+de onde
+
+\begin{equation}
+  \boxed{x_0=\SI{1}{\meter}}.
+\end{equation}
+
+Portanto, a equação da posição é \(\boxed{x(t)=1+3t}\), com \(x\) em metros e \(t\) em segundos.
+
+\subsection*{Verificação numérica em Python}
+
+O programa a seguir confere os resultados numéricos dos exercícios 1, 4, 5, 7, 8 e 10. Ele não substitui os desenvolvimentos anteriores: apenas executa as operações depois que o modelo já foi estabelecido.
+
+\lstinputlisting[
+  caption={Verificação numérica de resultados selecionados do Capítulo 1.},
+  label={cod:verificacao-solucoes-cap01}
+]{codigos/solucoes/verificacao_cap01.py}
+
+A saída esperada é
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada da verificação das soluções do Capítulo 1.}
+]{codigos/solucoes/saidas/verificacao_cap01.txt}

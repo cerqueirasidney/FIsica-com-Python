@@ -747,7 +747,30 @@ Uma força de módulo \SI{80}{\newton} forma um ângulo de $30^\circ$ acima da h
        = \SI{40}{\newton}.
 \end{align}
 
-Mais adiante, representaremos essa decomposição com vetores e verificaremos graficamente que $F^2=F_x^2+F_y^2$.
+A \cref{fig:componentes-forca} apresenta primeiro o vetor original e, depois, suas projeções sobre os eixos cartesianos. As linhas tracejadas completam o retângulo de decomposição e ajudam a visualizar a soma vetorial $\vetor{F}=\vetor{F}_x+\vetor{F}_y$.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.96\textwidth]{cap01/componentes-forca.pdf}
+  \caption{Uma força de \SI{80}{\newton} a $30^\circ$ da horizontal e sua decomposição. No segundo painel, $F_x\approx\SI{69.3}{\newton}$ e $F_y=\SI{40}{\newton}$.}
+  \label{fig:componentes-forca}
+\end{figure}
+
+O programa usado para produzir a figura aplica diretamente as relações calculadas no exemplo. O método \texttt{quiver}, introduzido no \cref{sec:primeiros-graficos}, recebe a origem da seta e suas componentes horizontal e vertical.
+
+\lstinputlisting[
+  caption={Representação da força e de suas componentes cartesianas.},
+  label={cod:componentes-forca}
+]{codigos/cap01/componentes_forca.py}
+
+A saída textual esperada é
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de componentes de uma força.}
+]{codigos/cap01/saidas/componentes_forca.txt}
+
+Além de confirmar os valores, o desenho permite verificar geometricamente que $F^2=F_x^2+F_y^2$.
 
 \subsection{Seno e cosseno em Python}
 
@@ -791,6 +814,35 @@ Antes de desenhar um gráfico, devemos identificar:
   \item o comportamento crescente, decrescente ou oscilatório;
   \item os limites do modelo.
 \end{enumerate}
+
+\subsection{Representação de funções em Python}
+
+Na \cref{sec:primeiros-graficos}, construímos gráficos a partir de listas e arrays. Para representar uma função matemática, seguimos o mesmo processo: escolhemos um domínio amostrado, calculamos a imagem de cada ponto e entregamos os dois arrays ao método \texttt{plot}.
+
+O programa a seguir define três funções com \texttt{def}. Como as operações usadas por elas são compatíveis com arrays NumPy, uma única chamada, como \texttt{funcao\_quadratica(x)}, calcula todos os valores necessários. Essa aplicação de uma operação elemento a elemento é chamada de \textbf{vetorização}.
+
+\lstinputlisting[
+  caption={Representação de funções linear, quadrática e inversa.},
+  label={cod:plotando-funcoes}
+]{codigos/cap01/plotando_funcoes.py}
+
+A saída textual esperada é
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de representação de funções.}
+]{codigos/cap01/saidas/plotando_funcoes.txt}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.98\textwidth]{cap01/funcoes-basicas.pdf}
+  \caption{Três funções calculadas no domínio amostrado $0{,}2\leq x\leq4{,}0$. Cada painel possui seus próprios eixos e representa uma relação matemática diferente.}
+  \label{fig:funcoes-basicas}
+\end{figure}
+
+O domínio começa em \num{0.2}, e não em zero, porque a função $1/x$ não está definida em $x=0$. Essa decisão ilustra uma regra importante: o programa não escolhe automaticamente um domínio matematicamente válido ou fisicamente significativo. Essa responsabilidade pertence a quem constrói o modelo.
+
+No laço \texttt{for}, a função \texttt{zip} agrupa, em cada repetição, um sistema de eixos, uma função e seu rótulo. Assim, evitamos repetir o mesmo conjunto de comandos para cada painel. A técnica é conveniente aqui porque os três gráficos compartilham a mesma estrutura; ela não deve esconder diferenças importantes entre grandezas, unidades ou domínios.
 
 \subsection{Relação linear}
 
@@ -885,17 +937,69 @@ Para $f(x)=x^2$, a derivada analítica é $f'(x)=2x$. O programa também estima 
   \label{fig:derivada-tangente}
 \end{figure}
 
-Algumas derivadas frequentes são
+\subsection{Regras de derivação mais utilizadas}
+
+Sejam $u(x)$ e $v(x)$ funções diferenciáveis e $c$ uma constante. As regras seguintes serão usadas repetidamente ao longo do livro.
+
+\subsubsection*{Constante, multiplicação por constante e soma}
+
+\begin{align}
+  \frac{\dd}{\dd x}c &= 0,\\
+  \frac{\dd}{\dd x}\bigl[c\,u(x)\bigr]
+    &=c\,u'(x),\\
+  \frac{\dd}{\dd x}\bigl[u(x)\pm v(x)\bigr]
+    &=u'(x)\pm v'(x).
+\end{align}
+
+Essas regras permitem derivar uma expressão termo a termo. Por exemplo,
+
+\begin{equation}
+  \frac{\dd}{\dd t}\left(x_0+v_0t+\frac{1}{2}at^2\right)
+  =v_0+at.
+\end{equation}
+
+\subsubsection*{Produto e quociente}
+
+\begin{align}
+  \frac{\dd}{\dd x}\bigl[u(x)v(x)\bigr]
+    &=u'(x)v(x)+u(x)v'(x),\\
+  \frac{\dd}{\dd x}\left[\frac{u(x)}{v(x)}\right]
+    &=\frac{u'(x)v(x)-u(x)v'(x)}{[v(x)]^2},
+    \qquad v(x)\neq0.
+\end{align}
+
+Não se deve derivar um produto multiplicando as derivadas, nem um quociente dividindo-as. As expressões completas acima são necessárias.
+
+\subsubsection*{Regra da cadeia}
+
+Quando uma função está dentro de outra, usamos
+
+\begin{equation}
+  \frac{\dd}{\dd x}f\bigl(u(x)\bigr)
+  =f'\bigl(u(x)\bigr)u'(x).
+\end{equation}
+
+Derivamos a função externa e multiplicamos pela derivada da função interna. Dois exemplos importantes em Física são
+
+\begin{align}
+  \frac{\dd}{\dd t}\cos(\omega t+\phi)
+    &=-\omega\sin(\omega t+\phi),\\
+  \frac{\dd}{\dd t}\e^{-t/\tau}
+    &=-\frac{1}{\tau}\e^{-t/\tau}.
+\end{align}
+
+\subsubsection*{Derivadas elementares}
 
 \begin{align}
   \frac{\dd}{\dd x}x^n &= nx^{n-1},\\
   \frac{\dd}{\dd x}\sin x &= \cos x,\\
   \frac{\dd}{\dd x}\cos x &= -\sin x,\\
   \frac{\dd}{\dd x}\e^x &= \e^x,\\
-  \frac{\dd}{\dd x}\ln x &= \frac{1}{x}.
+  \frac{\dd}{\dd x}\ln|x| &= \frac{1}{x},
+  \qquad x\neq0.
 \end{align}
 
-As fórmulas trigonométricas pressupõem que $x$ esteja em radianos.
+As fórmulas trigonométricas pressupõem que o argumento esteja em radianos. Regras específicas para outras funções e derivadas implícitas serão introduzidas quando forem necessárias.
 
 \subsection*{Exemplo: movimento não uniforme}
 
@@ -947,18 +1051,63 @@ Para $v(t)=2t$, a integral entre 0 e \SI{4}{\second} vale \SI{16}{\meter}. O pro
   \label{fig:integral-area}
 \end{figure}
 
-Algumas integrais elementares são
+\subsection{Regras de integração mais utilizadas}
+
+Uma antiderivada de $f(x)$ é uma função $F(x)$ cuja derivada é $f(x)$. Escrevemos
+
+\begin{equation}
+  \int f(x)\,\dd x=F(x)+C,
+\end{equation}
+
+onde $C$ é a constante de integração. Ela aparece porque funções que diferem apenas por uma constante possuem a mesma derivada.
+
+\subsubsection*{Linearidade}
+
+Se $c$ é constante,
 
 \begin{align}
-  \int x^n\,\dd x &= \frac{x^{n+1}}{n+1}+C,
-  \qquad n\neq -1,\\
-  \int \frac{1}{x}\,\dd x &= \ln|x|+C,\\
-  \int \sin x\,\dd x &= -\cos x+C,\\
-  \int \cos x\,\dd x &= \sin x+C,\\
-  \int \e^x\,\dd x &= \e^x+C.
+  \int c\,f(x)\,\dd x
+    &=c\int f(x)\,\dd x,\\
+  \int\bigl[f(x)\pm g(x)\bigr],\dd x
+    &=\int f(x)\,\dd x
+      \pm\int g(x)\,\dd x.
 \end{align}
 
-A constante $C$ aparece porque funções que diferem apenas por uma constante possuem a mesma derivada.
+Assim como na derivação, uma soma pode ser tratada termo a termo. Entretanto, não existe uma regra geral que permita integrar um produto apenas multiplicando integrais.
+
+\subsubsection*{Integrais elementares}
+
+\begin{align}
+  \int x^n\,\dd x
+    &=\frac{x^{n+1}}{n+1}+C,
+    &&n\neq-1,\\
+  \int \frac{1}{x}\,\dd x
+    &=\ln|x|+C,
+    &&x\neq0,\\
+  \int \e^{ax}\,\dd x
+    &=\frac{1}{a}\e^{ax}+C,
+    &&a\neq0,\\
+  \int \sin(ax)\,\dd x
+    &=-\frac{1}{a}\cos(ax)+C,
+    &&a\neq0,\\
+  \int \cos(ax)\,\dd x
+    &=\frac{1}{a}\sin(ax)+C,
+    &&a\neq0.
+\end{align}
+
+Os fatores $1/a$ aparecem por causa da regra da cadeia. Podemos verificar cada resultado derivando o lado direito.
+
+\subsubsection*{Integral definida e teorema fundamental}
+
+Se $F'(x)=f(x)$, então
+
+\begin{equation}
+  \int_a^b f(x)\,\dd x=F(b)-F(a).
+\end{equation}
+
+Em uma integral definida, a constante $C$ não aparece no resultado porque seria cancelada na diferença entre os limites. O valor representa uma acumulação líquida: contribuições positivas e negativas são combinadas algebricamente.
+
+Integração por substituição, integração por partes e outras técnicas serão apresentadas apenas quando os modelos físicos exigirem seu uso.
 
 \subsection*{Exemplo: deslocamento com velocidade variável}
 

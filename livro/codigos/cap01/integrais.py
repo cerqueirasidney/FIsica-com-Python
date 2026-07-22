@@ -31,8 +31,10 @@ ax.grid(alpha=0.3)
 ax.legend()
 fig.tight_layout()
 
-destino = Path(__file__).resolve().parents[2] / "figuras" / "cap01"
-destino.mkdir(parents=True, exist_ok=True)
-fig.savefig(destino / "integral-area.pdf", bbox_inches="tight")
+pasta_figuras = Path("figuras") / "cap01"
+pasta_figuras.mkdir(parents=True, exist_ok=True)
+arquivo = pasta_figuras / "integral-area.pdf"
+fig.savefig(arquivo, bbox_inches="tight")
 plt.close(fig)
 
+print("Gráfico salvo em figuras/cap01/integral-area.pdf")

@@ -1,0 +1,3 @@
+Fx = 69.3 N
+Fy = 40.0 N
+Gráfico salvo em figuras/cap01/componentes-forca.pdf

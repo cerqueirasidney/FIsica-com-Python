@@ -1,4 +1,4 @@
 log10(1000) = 3.0
 ln(4) = 1.386294
 Tempo para N0/4: 2.773 s
-
+Gráfico salvo em figuras/cap01/lei-potencia-loglog.pdf

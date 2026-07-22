@@ -50,9 +50,9 @@ ax.set_aspect("equal")
 ax.grid(alpha=0.25)
 fig.tight_layout()
 
-destino = Path(__file__).resolve().parents[2] / "figuras" / "cap01"
-destino.mkdir(parents=True, exist_ok=True)
-fig.savefig(destino / "circulo-trigonometrico.pdf", bbox_inches="tight")
+pasta_figuras = Path("figuras") / "cap01"
+pasta_figuras.mkdir(parents=True, exist_ok=True)
+fig.savefig(pasta_figuras / "circulo-trigonometrico.pdf", bbox_inches="tight")
 plt.close(fig)
 
 fig, ax = plt.subplots(figsize=(7, 4.5))
@@ -77,5 +77,7 @@ ax.grid(alpha=0.3)
 ax.legend()
 fig.tight_layout()
 
-fig.savefig(destino / "seno-cosseno.pdf", bbox_inches="tight")
+fig.savefig(pasta_figuras / "seno-cosseno.pdf", bbox_inches="tight")
 plt.close(fig)
+
+print("Figuras salvas em figuras/cap01/")

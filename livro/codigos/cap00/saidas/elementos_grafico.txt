@@ -1,0 +1,2 @@
+Foram calculados 101 pontos por curva.
+Gráfico salvo em figuras/cap00/elementos-grafico.pdf

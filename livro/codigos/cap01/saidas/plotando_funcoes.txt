@@ -1,0 +1,3 @@
+Domínio: 0.2 <= x <= 4.0
+Quantidade de pontos: 300
+Gráfico salvo em figuras/cap01/funcoes-basicas.pdf
