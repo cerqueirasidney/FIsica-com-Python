@@ -1,0 +1,28 @@
+\documentclass[12pt,openright,twoside,a4paper]{book}
+
+\input{configuracao/preambulo}
+
+% Durante a revisão, descomente para compilar somente um capítulo:
+% \includeonly{capitulos/cap01-ferramentas-matematicas}
+
+\begin{document}
+
+\frontmatter
+\title{Física com Python}
+\author{Sidney Cerqueira}
+\date{\the\year}
+\maketitle
+\tableofcontents
+
+\mainmatter
+\include{capitulos/cap00-python}
+\include{capitulos/cap01-ferramentas-matematicas}
+
+% Os próximos capítulos serão incluídos somente após aprovação:
+% \include{capitulos/cap02-medidas-e-incertezas}
+% \include{capitulos/cap03-vetores}
+
+\backmatter
+\include{solucoes/solucoes}
+
+\end{document}
