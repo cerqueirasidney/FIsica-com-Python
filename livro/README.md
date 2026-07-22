@@ -21,6 +21,8 @@ livro/
 
 O arquivo principal usa `\include` para os capítulos. Isso permite usar `\includeonly` durante a revisão e mantém cada capítulo começando em uma nova página. O preâmbulo usa `\input`, pois não constitui uma unidade textual independente.
 
+A família tipográfica principal é **Nunito**, incluída em `fontes/` sob a SIL Open Font License. O projeto deve ser compilado com um mecanismo compatível com `fontspec`, como XeLaTeX, LuaLaTeX ou Tectonic; `pdflatex` não é compatível com esta configuração.
+
 ## Processo editorial
 
 1. escrever e revisar o texto do capítulo;

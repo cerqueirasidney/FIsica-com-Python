@@ -1,0 +1,3 @@
+Deslocamento exato: 16.00 m
+Deslocamento numerico: 16.00 m
+

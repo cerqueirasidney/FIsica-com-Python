@@ -11,7 +11,7 @@ Adotaremos o \textbf{Python 3.12}. Versões posteriores da série 3 provavelment
 
 \section{Interpretador, programa e script}
 
-O interpretador Python é o programa que lê e executa instruções escritas na linguagem Python. Uma instrução pode ser digitada em uma sessão interativa ou armazenada em um arquivo de texto com extensão 	exttt{.py}.
+O interpretador Python é o programa que lê e executa instruções escritas na linguagem Python. Uma instrução pode ser digitada em uma sessão interativa ou armazenada em um arquivo de texto com extensão \texttt{.py}.
 
 Um arquivo como
 
@@ -59,7 +59,7 @@ Os exemplos deste livro serão escritos como scripts Python portáveis. Sempre q
 
 \section{O primeiro programa}
 
-A função 	exttt{print} envia uma representação de um valor para a saída do programa:
+A função \texttt{print} envia uma representação de um valor para a saída do programa:
 
 \begin{lstlisting}
 print("Fisica com Python")
@@ -71,7 +71,7 @@ O texto entre aspas é uma \emph{string}, isto é, uma sequência de caracteres.
 Fisica com Python
 \end{lstlisting}
 
-Os parênteses delimitam os argumentos fornecidos à função. Nesse exemplo, 	exttt{print} recebeu uma string como argumento.
+Os parênteses delimitam os argumentos. Aqui, o argumento é uma string.
 
 \section{Valores, variáveis e atribuição}
 
@@ -81,7 +81,7 @@ Uma variável é um nome associado a um valor. A instrução
 massa = 2.5
 \end{lstlisting}
 
-associa o nome 	exttt{massa} ao valor numérico 	exttt{2.5}. O símbolo 	exttt{=} realiza uma \textbf{atribuição}; ele não afirma uma igualdade algébrica permanente.
+associa o nome \texttt{massa} ao valor numérico \texttt{2.5}. O símbolo \texttt{=} realiza uma \textbf{atribuição}; ele não afirma uma igualdade algébrica permanente.
 
 Depois de
 
@@ -90,7 +90,7 @@ velocidade = 3.0
 velocidade = 5.0
 \end{lstlisting}
 
-o nome 	exttt{velocidade} está associado a 	exttt{5.0}. A segunda atribuição substitui a referência anterior.
+o nome \texttt{velocidade} está associado a \texttt{5.0}. A segunda atribuição substitui a referência anterior.
 
 Nomes de variáveis devem comunicar seu significado. Usaremos, por exemplo,
 
@@ -99,7 +99,7 @@ tempo_total = 12.0
 velocidade_inicial = 4.5
 \end{lstlisting}
 
-em vez de nomes genéricos como 	exttt{a} ou 	exttt{x1}, exceto quando a notação matemática justificar nomes curtos.
+em vez de nomes genéricos como \texttt{a} ou \texttt{x1}, exceto quando a notação matemática justificar nomes curtos.
 
 O Python não associa unidades físicas automaticamente a números comuns. Por isso, as unidades devem ser declaradas no texto, nos comentários e nos rótulos das saídas:
 
@@ -108,7 +108,7 @@ distancia = 120.0  # metros
 tempo = 10.0       # segundos
 \end{lstlisting}
 
-O caractere 	exttt{\#} inicia um comentário. O interpretador ignora o restante daquela linha, mas o comentário ajuda uma pessoa a compreender o programa.
+O caractere \texttt{\#} inicia um comentário. O interpretador ignora o restante daquela linha, mas o comentário ajuda uma pessoa a compreender o programa.
 
 \section{Tipos fundamentais}
 
@@ -119,22 +119,29 @@ Cada valor possui um tipo. Entre os tipos fundamentais estão:
 \toprule
 Tipo & Significado & Exemplo\\
 \midrule
-\texttt{int} & número inteiro & 	exttt{12}\\
-\texttt{float} & número de ponto flutuante & 	exttt{9.81}\\
-\texttt{str} & sequência de caracteres & 	exttt{"tempo"}\\
-\texttt{bool} & valor lógico & 	exttt{True}, 	exttt{False}\\
+\texttt{int} & número inteiro & \texttt{12}\\
+\texttt{float} & número de ponto flutuante & \texttt{9.81}\\
+\texttt{str} & sequência de caracteres & \texttt{tempo}\\
+\texttt{bool} & valor lógico & \texttt{True}, \texttt{False}\\
 \bottomrule
 \end{tabular}
 \end{center}
 
-A função 	exttt{type} informa o tipo de um valor:
+A função \texttt{type} informa o tipo de um valor:
 
 \begin{lstlisting}
 print(type(12))
 print(type(9.81))
 \end{lstlisting}
 
-Um 	exttt{float} é uma aproximação computacional de um número real. Como sua representação possui precisão finita, algumas operações produzem pequenas diferenças de arredondamento. Esse comportamento será considerado sempre que compararmos resultados numéricos.
+A saída esperada é
+
+\begin{lstlisting}[style=saidaesperada]
+<class 'int'>
+<class 'float'>
+\end{lstlisting}
+
+Um \texttt{float} é uma aproximação computacional de um número real. Como sua representação possui precisão finita, algumas operações produzem pequenas diferenças de arredondamento. Esse comportamento será considerado sempre que compararmos resultados numéricos.
 
 \section{Operadores aritméticos}
 
@@ -145,13 +152,13 @@ Os operadores aritméticos básicos são:
 \toprule
 Operador & Operação & Exemplo\\
 \midrule
-\texttt{+} & adição & 	exttt{a + b}\\
-\texttt{-} & subtração & 	exttt{a - b}\\
-\texttt{*} & multiplicação & 	exttt{a * b}\\
-\texttt{/} & divisão & 	exttt{a / b}\\
-\texttt{**} & potência & 	exttt{a ** 2}\\
-\texttt{//} & divisão inteira & 	exttt{a // b}\\
-\texttt{\%} & resto da divisão & 	exttt{a \% b}\\
+\texttt{+} & adição & \texttt{a + b}\\
+\texttt{-} & subtração & \texttt{a - b}\\
+\texttt{*} & multiplicação & \texttt{a * b}\\
+\texttt{/} & divisão & \texttt{a / b}\\
+\texttt{**} & potência & \texttt{a ** 2}\\
+\texttt{//} & divisão inteira & \texttt{a // b}\\
+\texttt{\%} & resto da divisão & \texttt{a \% b}\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -172,7 +179,7 @@ energia = 9.0
 print(f"Energia cinetica: {energia:.2f} J")
 \end{lstlisting}
 
-A especificação 	exttt{:.2f} apresenta o número com duas casas decimais. A saída será
+A especificação \texttt{:.2f} apresenta o número com duas casas decimais. A saída será
 
 \begin{lstlisting}[language={},numbers=none]
 Energia cinetica: 9.00 J
@@ -189,7 +196,7 @@ def energia_cinetica(massa, velocidade):
     return 0.5 * massa * velocidade**2
 \end{lstlisting}
 
-A palavra 	exttt{def} inicia a definição; os dois-pontos abrem um bloco; a indentação identifica as instruções pertencentes à função; e 	exttt{return} devolve o resultado.
+A palavra \texttt{def} inicia a definição; os dois-pontos abrem um bloco; a indentação identifica as instruções pertencentes à função; e \texttt{return} devolve o resultado.
 
 A função pode ser utilizada por meio de uma chamada:
 
@@ -198,13 +205,19 @@ energia = energia_cinetica(2.0, 3.0)
 print(energia)
 \end{lstlisting}
 
+A saída esperada é
+
+\begin{lstlisting}[style=saidaesperada]
+9.0
+\end{lstlisting}
+
 Separar um cálculo em uma função reduz repetição, facilita testes e explicita o modelo empregado.
 
 \section{Módulos e bibliotecas}
 
-Um módulo é um arquivo que contém definições Python reutilizáveis. Uma biblioteca é uma coleção organizada de módulos. O comando 	exttt{import} torna essas definições disponíveis no programa.
+Um módulo é um arquivo que contém definições Python reutilizáveis. Uma biblioteca é uma coleção organizada de módulos. O comando \texttt{import} torna essas definições disponíveis no programa.
 
-O módulo 	exttt{math} pertence à biblioteca padrão, instalada juntamente com o Python:
+O módulo \texttt{math} pertence à biblioteca padrão, instalada juntamente com o Python:
 
 \begin{lstlisting}
 import math
@@ -213,7 +226,7 @@ raiz = math.sqrt(25)
 angulo = math.radians(30)
 \end{lstlisting}
 
-O prefixo 	exttt{math.} informa em qual módulo a função foi definida e evita ambiguidades.
+O prefixo \texttt{math.} informa em qual módulo a função foi definida e evita ambiguidades.
 
 Bibliotecas externas são instaladas separadamente. Neste livro, as principais serão:
 
@@ -231,25 +244,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 \end{lstlisting}
 
-Os nomes 	exttt{np} e 	exttt{plt} são convenções amplamente utilizadas. Eles são aliases: nomes abreviados associados aos módulos importados.
+Os nomes \texttt{np} e \texttt{plt} são convenções amplamente utilizadas. Eles são aliases: nomes abreviados associados aos módulos importados.
 
 \section{Ambiente virtual e dependências}
 
 Um ambiente virtual isola o interpretador e as bibliotecas de um projeto. Assim, projetos diferentes podem utilizar versões diferentes de uma mesma biblioteca sem interferência entre si.
 
-Neste repositório, o ambiente local fica na pasta 	exttt{.venv}. No terminal do VS Code para Windows, ele pode ser ativado com
+Neste repositório, o ambiente local fica na pasta \texttt{.venv}. No terminal do VS Code para Windows, ele pode ser ativado com
 
 \begin{lstlisting}[language={},numbers=none]
 .\.venv\Scripts\Activate.ps1
 \end{lstlisting}
 
-As dependências declaradas no arquivo 	exttt{requirements.txt} podem ser instaladas com
+As dependências declaradas no arquivo \texttt{requirements.txt} podem ser instaladas com
 
 \begin{lstlisting}[language={},numbers=none]
 python -m pip install -r requirements.txt
 \end{lstlisting}
 
-O comando 	exttt{python -m pip} garante que o instalador utilizado pertence ao interpretador Python selecionado.
+O comando \texttt{python -m pip} garante que o instalador utilizado pertence ao interpretador Python selecionado.
 
 \section{Erros como informação}
 

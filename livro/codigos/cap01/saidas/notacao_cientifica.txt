@@ -1,0 +1,6 @@
+Tempo na forma decimal: 4.8e-06
+Tempo em notacao cientifica: 4.80e-06 s
+Distancia em notacao cientifica: 3.84e+08 m
+Produto: 6.00e+02
+Quociente: 4.00e+04
+

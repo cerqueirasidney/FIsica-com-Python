@@ -1,0 +1,6 @@
+ 0 graus: sen = 0.0000, cos = 1.0000
+30 graus: sen = 0.5000, cos = 0.8660
+45 graus: sen = 0.7071, cos = 0.7071
+60 graus: sen = 0.8660, cos = 0.5000
+90 graus: sen = 1.0000, cos = 0.0000
+

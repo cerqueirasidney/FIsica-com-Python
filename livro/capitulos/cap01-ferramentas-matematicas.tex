@@ -57,14 +57,19 @@ Essas propriedades aparecem frequentemente na manipulação de fórmulas física
 
 \subsection{Potências em Python}
 
-Em Python, o operador de potência é formado por dois asteriscos, 	exttt{**}. O símbolo 	exttt{\^} não representa potência: ele executa uma operação binária chamada \emph{XOR}.
+Em Python, o operador de potência é formado por dois asteriscos, \texttt{**}. O símbolo \texttt{\^} não representa potência: ele executa uma operação binária chamada \emph{XOR}.
 
 \lstinputlisting[
   caption={Potências, raízes e uma aplicação à energia cinética.},
   label={lst:potencias-escalas}
 ]{codigos/cap01/potencias_e_escalas.py}
 
-O valor calculado para $64^{1/3}$ pode aparecer como $3{,}9999999999999996$ em vez de 4. Isso ocorre porque muitos números reais não possuem representação binária finita no computador. A formatação 	exttt{:.2f} controla a apresentação do resultado, mas não altera o valor armazenado.
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de potências e escalas.}
+]{codigos/cap01/saidas/potencias_e_escalas.txt}
+
+O valor calculado para $64^{1/3}$ pode aparecer como $3{,}9999999999999996$ em vez de 4. Isso ocorre porque muitos números reais não possuem representação binária finita no computador. A formatação \texttt{:.2f} controla a apresentação do resultado, mas não altera o valor armazenado.
 
 No trecho final do \cref{lst:potencias-escalas}, triplicamos a velocidade e verificamos numericamente que a energia cinética é multiplicada por nove. O programa, portanto, não apenas calcula um valor: ele testa uma previsão obtida pela análise matemática.
 
@@ -136,6 +141,20 @@ Na adição e na subtração, os expoentes precisam ser iguais. Por exemplo,
   &=3{,}2\times10^5+0{,}7\times10^5\\
   &=3{,}9\times10^5.
 \end{align}
+
+\subsection{Notação científica em Python}
+
+Python aceita a letra \texttt{e} para representar potências de 10. Assim, \texttt{4.8e-6} corresponde a $4{,}8\times10^{-6}$. A especificação de formato \texttt{.2e} apresenta um número em notação científica com duas casas decimais.
+
+\lstinputlisting[
+  caption={Representação e operações com notação científica.},
+  label={lst:notacao-cientifica}
+]{codigos/cap01/notacao_cientifica.py}
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de notação científica.}
+]{codigos/cap01/saidas/notacao_cientifica.txt}
 
 \subsection{Ordem de grandeza}
 
@@ -227,7 +246,7 @@ A razão entre as duas grandezas permanece constante:
   \frac{y}{x}=k.
 \end{equation}
 
-Se $x$ for multiplicado por um fator $f$, então $y$ será multiplicado pelo mesmo fator:
+Se multiplicarmos $x$ por um fator $f$, o mesmo acontecerá com $y$:
 
 \begin{equation}
   x'=fx
@@ -306,7 +325,7 @@ Se a velocidade for triplicada, $v'=3v$. Assim,
   =9.
 \end{equation}
 
-Portanto, triplicar a velocidade multiplica a energia cinética por nove. Esse resultado não significa apenas que a energia aumentou. Ele mostra que a dependência quadrática torna o aumento da energia mais rápido que o aumento da velocidade.
+Portanto, triplicar a velocidade multiplica a energia cinética por nove. A dependência quadrática faz a energia crescer mais rapidamente que a velocidade.
 
 \subsection{Proporcionalidade inversa}
 
@@ -428,10 +447,10 @@ Portanto, identificar uma proporcionalidade exige também perguntar:
 \begin{enumerate}
   \item Se $y\propto x^3$, por qual fator $y$ muda quando $x$ dobra?
   \item Se $y\propto1/x^2$, por qual fator $y$ muda quando $x$ é dividido por 3?
-  \item Mantendo a velocidade constante, como a energia cinética varia quando a massa é multiplicada por 5?
-  \item Mantendo a massa constante, por qual fator a velocidade deve mudar para que a energia cinética seja multiplicada por 4?
-  \item Se $P\propto A^2/(BC)$, determine o fator de mudança de $P$ quando $A$ dobra, $B$ triplica e $C$ é reduzido à metade.
-  \item Explique por que uma proporcionalidade matematicamente correta pode deixar de representar um sistema físico real.
+  \item Com velocidade constante, o que ocorre com $E_c$ se a massa quintuplica?
+  \item Com massa constante, o que ocorre com $v$ para $E_c$ quadruplicar?
+  \item Considere $P\propto A^2/(BC)$. Determine a mudança em $P$ quando $A$ dobra, $B$ triplica e $C$ é reduzido à metade.
+  \item Explique por que uma proporcionalidade correta pode deixar de representar um sistema físico real.
 \end{enumerate}
 
 \section{Logaritmos e escalas logarítmicas}
@@ -592,7 +611,7 @@ Se a intensidade for multiplicada por 10, o nível aumenta em \SI{10}{\decibel}:
 
 \subsection{Argumentos dimensionais}
 
-O argumento de um logaritmo deve ser adimensional. Por isso, expressões físicas logarítmicas normalmente envolvem razões entre grandezas de mesma dimensão, como
+O argumento de um logaritmo deve ser adimensional. Por isso, expressões físicas logarítmicas usam razões entre grandezas de mesma dimensão, como
 
 \begin{equation}
   \ln\left(\frac{x}{x_0}\right)
@@ -645,6 +664,27 @@ Como $\ln(1/4)=-\ln4$, obtemos
 \begin{equation}
   t=\tau\ln4\approx1{,}386\tau.
 \end{equation}
+
+\subsection{Logaritmos em Python}
+
+O módulo \texttt{math} oferece \texttt{log10} para o logaritmo decimal e \texttt{log} para o logaritmo natural. No mesmo programa, usamos escalas logarítmicas nos dois eixos para visualizar a lei $y=3x^2$.
+
+\lstinputlisting[
+  caption={Logaritmos, decaimento exponencial e gráfico log-log.},
+  label={lst:logaritmos}
+]{codigos/cap01/logaritmos.py}
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de logaritmos.}
+]{codigos/cap01/saidas/logaritmos.txt}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\textwidth]{cap01/lei-potencia-loglog.pdf}
+  \caption{A lei de potência $y=3x^2$ em escalas logarítmicas. A inclinação constante corresponde ao expoente 2.}
+  \label{fig:lei-potencia-loglog}
+\end{figure}
 
 \subsection*{Verificação conceitual}
 
@@ -708,6 +748,34 @@ Uma força de módulo \SI{80}{\newton} forma um ângulo de $30^\circ$ acima da h
 \end{align}
 
 Mais adiante, representaremos essa decomposição com vetores e verificaremos graficamente que $F^2=F_x^2+F_y^2$.
+
+\subsection{Seno e cosseno em Python}
+
+As funções \texttt{sin} e \texttt{cos} do módulo \texttt{math} recebem ângulos em radianos. Por isso, o programa converte graus com \texttt{math.radians} antes do cálculo. Ele também produz o círculo trigonométrico da \cref{fig:circulo-trigonometrico} e os gráficos periódicos da \cref{fig:seno-cosseno}.
+
+\lstinputlisting[
+  caption={Valores de seno e cosseno e geração das figuras trigonométricas.},
+  label={lst:trigonometria}
+]{codigos/cap01/trigonometria.py}
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de trigonometria.}
+]{codigos/cap01/saidas/trigonometria.txt}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.62\textwidth]{cap01/circulo-trigonometrico.pdf}
+  \caption{No círculo unitário, as coordenadas do ponto são $\cos\theta$ e $\sin\theta$. As linhas tracejadas mostram suas projeções nos eixos.}
+  \label{fig:circulo-trigonometrico}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\textwidth]{cap01/seno-cosseno.pdf}
+  \caption{Seno e cosseno ao longo de uma volta completa. O estilo tracejado diferencia o cosseno mesmo em impressão sem cores.}
+  \label{fig:seno-cosseno}
+\end{figure}
 
 \section{Funções e gráficos}
 
@@ -796,6 +864,27 @@ e para a velocidade,
       =\frac{\dd^2x}{\dd t^2}.
 \end{equation}
 
+\subsection{Derivada analítica e derivada numérica}
+
+Para $f(x)=x^2$, a derivada analítica é $f'(x)=2x$. O programa também estima a derivada numericamente por uma diferença central com intervalo pequeno. A concordância das duas abordagens em $x=2$ valida o cálculo, enquanto a \cref{fig:derivada-tangente} mostra a interpretação geométrica da inclinação.
+
+\lstinputlisting[
+  caption={Comparação entre derivada analítica e diferença central.},
+  label={lst:derivadas}
+]{codigos/cap01/derivadas.py}
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de derivadas.}
+]{codigos/cap01/saidas/derivadas.txt}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\textwidth]{cap01/derivada-tangente.pdf}
+  \caption{A derivada de $f(x)=x^2$ em $x=2$ é a inclinação da reta tangente no ponto $(2,4)$.}
+  \label{fig:derivada-tangente}
+\end{figure}
+
 Algumas derivadas frequentes são
 
 \begin{align}
@@ -837,6 +926,27 @@ A integral definida pode ser entendida como o limite de uma soma de pequenas con
 
 Geometricamente, essa integral corresponde à área algébrica sob o gráfico $v\times t$. Regiões abaixo do eixo temporal contribuem negativamente, o que distingue deslocamento de distância total percorrida.
 
+\subsection{Integral analítica e integração numérica}
+
+Para $v(t)=2t$, a integral entre 0 e \SI{4}{\second} vale \SI{16}{\meter}. O programa compara esse resultado com a regra dos trapézios implementada por \texttt{numpy.trapezoid}. A região sombreada na \cref{fig:integral-area} representa o deslocamento acumulado.
+
+\lstinputlisting[
+  caption={Comparação entre integral analítica e integração numérica.},
+  label={lst:integrais}
+]{codigos/cap01/integrais.py}
+
+\lstinputlisting[
+  style=saidaesperada,
+  caption={Saída esperada do programa de integrais.}
+]{codigos/cap01/saidas/integrais.txt}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.82\textwidth]{cap01/integral-area.pdf}
+  \caption{O deslocamento é a área sob o gráfico de velocidade por tempo. Para $v(t)=2t$, a área triangular vale \SI{16}{\meter}.}
+  \label{fig:integral-area}
+\end{figure}
+
 Algumas integrais elementares são
 
 \begin{align}
@@ -870,7 +980,7 @@ Em um ponto interior onde uma função diferenciável possui máximo ou mínimo 
   f'(x)=0.
 \end{equation}
 
-Essa condição identifica pontos candidatos; não basta, sozinha, para classificá-los. Se
+Essa condição identifica pontos candidatos, mas não os classifica. Se
 
 \begin{equation}
   f''(x)>0,
@@ -913,7 +1023,7 @@ Uma solução organizada costuma seguir estas etapas:
   \item reconhecer limitações do modelo.
 \end{enumerate}
 
-Programas de computador podem automatizar operações e ampliar nossa capacidade de exploração, mas não escolhem sozinhos o sistema, as hipóteses ou o significado físico do resultado. Essa responsabilidade permanece com quem modela.
+Programas de computador automatizam operações e ampliam nossa capacidade de exploração. Entretanto, não escolhem sozinhos o sistema, as hipóteses nem o significado físico do resultado. Essa responsabilidade permanece com quem modela.
 
 \section{Síntese}
 

@@ -1,8 +1,26 @@
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
-\usepackage{lmodern}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[
+  Path=fontes/,
+  UprightFont=Nunito-VariableFont_wght.ttf,
+  ItalicFont=Nunito-Italic-VariableFont_wght.ttf,
+  BoldFont=Nunito-VariableFont_wght.ttf,
+  BoldItalicFont=Nunito-Italic-VariableFont_wght.ttf,
+  BoldFeatures={FakeBold=2},
+  BoldItalicFeatures={FakeBold=2}
+]{Nunito}
+\setsansfont[
+  Path=fontes/,
+  UprightFont=Nunito-VariableFont_wght.ttf,
+  ItalicFont=Nunito-Italic-VariableFont_wght.ttf,
+  BoldFont=Nunito-VariableFont_wght.ttf,
+  BoldItalicFont=Nunito-Italic-VariableFont_wght.ttf,
+  BoldFeatures={FakeBold=2},
+  BoldItalicFeatures={FakeBold=2}
+]{Nunito}
 \usepackage{microtype}
+\raggedbottom
 
 \usepackage{amsmath,amssymb,mathtools}
 \usepackage{siunitx}
@@ -47,6 +65,19 @@
   rulecolor=\color{black!20},
   numbers=left,
   numberstyle=\tiny\color{black!55},
+  breaklines=true,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true
+}
+
+\lstdefinestyle{saidaesperada}{
+  language={},
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{black!4},
+  frame=single,
+  rulecolor=\color{black!20},
+  numbers=none,
   breaklines=true,
   showstringspaces=false,
   columns=fullflexible,

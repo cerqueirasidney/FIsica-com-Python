@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .vscode/
+.tools/
 
 # Arquivos auxiliares do LaTeX
 *.aux
@@ -20,4 +21,6 @@ __pycache__/
 
 # Saídas geradas
 livro/build/
+tmp/pdfs/
+output/pdf/preview-*.png
 
