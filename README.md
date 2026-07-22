@@ -1,60 +1,53 @@
-# Física com Python
+# 📚 Física com Python: Um Guia Prático e Computacional
 
-Projeto de livro didático que combina conceitos de Física, modelagem matemática e programação em Python.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black)
+![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
 
-## Objetivo
+> Transformando equações teóricas em simulações visuais e interativas. Um laboratório computacional focado no ensino de Física através da programação.
 
-Construir uma introdução prática à Física usando simulações, gráficos e experimentos computacionais reproduzíveis.
+---
 
-O projeto cobre a progressão de uma coleção ampla de Física preparatória, mas possui texto, exemplos, exercícios e códigos próprios. A [arquitetura editorial](planejamento/arquitetura.md) registra o plano dos 36 capítulos e as regras de originalidade.
+## 🎯 Sobre o Projeto
 
-## Estrutura inicial
+Este repositório funciona como um **livro interativo e laboratório virtual**. O objetivo principal é unir a robustez da linguagem Python com os conceitos fundamentais da Física, permitindo que estudantes, professores e recrutadores visualizem a ciência em movimento.
 
-- `index.qmd`: apresentação do livro;
-- `prefacio.qmd`: público, proposta e convenções;
-- `capitulos/`: texto principal;
-- `exercicios/`: listas de problemas;
-- `codigo/`: scripts Python reutilizáveis;
-- `testes/`: verificações automáticas dos modelos;
-- `planejamento/`: arquitetura e critérios editoriais;
-- `referencias.bib`: bibliografia;
-- `_quarto.yml`: organização e configuração do livro.
+Aqui, as fórmulas deixam de ser estáticas e passam a gerar gráficos, trajetórias, análise de dados e simulações em tempo real. É a demonstração prática de como aplicar a lógica de programação e a ciência de dados na resolução de problemas científicos reais.
 
-## Pré-requisitos locais
+---
 
-1. Instale o [Python](https://www.python.org/) e o [Quarto](https://quarto.org/).
-2. Crie um ambiente virtual e instale as dependências:
+## 📖 Estrutura do "Livro" (Módulos do Repositório)
 
-```powershell
-py -m venv .venv
-.venv\Scripts\Activate.ps1
-py -m pip install -r requirements.txt
-```
+O projeto está estruturado em capítulos, cobrindo as grandes áreas da Física de forma modular:
 
-3. Visualize o livro:
+### ⚙️ 1. Mecânica Clássica
+* **Cinemática:** Gráficos de MRU/MRUV e simulação vetorial de Lançamento de Projetéis.
+* **Dinâmica:** Análise de forças, plano inclinado e sistemas de **Roldanas/Polias**.
 
-```powershell
-quarto preview
-```
+### 🌡️ 2. Termodinâmica
+* **Gases Ideais:** Simulação do comportamento de variáveis de estado ($P$, $V$, $T$).
+* **Ciclos Térmicos:** Plotagem e cálculo de eficiência do Ciclo de Carnot.
 
-## Começando do zero
+### ⚡ 3. Eletromagnetismo
+* **Eletrodinâmica:** Análise de circuitos elétricos resistivos e aplicação da Lei de Ohm.
+* **Campos:** Visualização de linhas de campo elétrico e magnético.
 
-No Windows, execute o menu de aulas:
+---
 
-```powershell
-.\iniciar_estudos.cmd
-```
+## 🛠️ Tecnologias e Dependências Utilizadas
 
-Você também pode dar duplo clique em `iniciar_estudos.cmd`. O lançador não modifica permanentemente a política de segurança do PowerShell.
+Para construir as simulações e gráficos sem precisar reescrever motores matemáticos do zero, este projeto utiliza as seguintes bibliotecas nativas e de terceiros:
 
-Ou siga as instruções das [aulas executáveis](aulas/README.md). Elas começam por variáveis e operações e avançam gradualmente para gráficos, vetores e movimento.
+* **Python 3.x:** Linguagem base para o desenvolvimento da lógica de programação.
+* **NumPy:** Biblioteca essencial para computação científica, utilizada na manipulação de matrizes, vetores e funções matemáticas de alta performance.
+* **Matplotlib:** Ferramenta de plotagem responsável por gerar os gráficos bidimensionais e as animações das trajetórias em tempo real.
 
-Para verificar os módulos Python sem instalar bibliotecas adicionais:
+---
 
-```powershell
-py -m unittest discover -s testes
-```
+## 🚀 Como Executar as Simulações
 
-## Licença
+Para rodar as simulações localmente, você precisa ter o Python instalado e baixar as dependências do projeto listadas no arquivo `requirements.txt`.
 
-O código-fonte é disponibilizado sob a licença MIT. O texto do livro permanece protegido por direitos autorais do autor, salvo indicação diferente.
+1. **Clone este repositório:**
+   ```bash
+   git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/seu-usuario/nome-do-repositorio.git)
