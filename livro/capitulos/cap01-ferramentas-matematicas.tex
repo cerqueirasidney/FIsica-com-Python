@@ -1,0 +1,957 @@
+\chapter{Ferramentas matemáticas para a Física}
+\label{cap:ferramentas-matematicas}
+
+\section{Por que começar pela matemática?}
+
+A Física procura descrever regularidades da natureza. Para isso, transforma observações em grandezas mensuráveis e relações entre essas grandezas. A matemática não substitui o fenômeno: ela oferece uma linguagem compacta para formular um modelo, extrair consequências e comparar previsões com medidas.
+
+Considere uma pessoa que caminha em linha reta. A frase ``ela se afasta da origem mantendo o mesmo ritmo'' pode ser representada por
+
+\begin{equation}
+  x(t)=x_0+vt,
+  \label{eq:posicao-mu}
+\end{equation}
+
+em que $x$ é a posição, $t$ é o instante, $x_0$ é a posição inicial e $v$ é a velocidade constante. A equação não é o movimento real; é um modelo que conserva apenas as características relevantes para a pergunta investigada.
+
+Neste capítulo, revisaremos as ferramentas matemáticas que aparecerão repetidamente no livro. O objetivo não é apresentar um curso completo de matemática, mas construir um vocabulário operacional para interpretar equações, gráficos e variações.
+
+\section{Potências e raízes}
+
+Uma potência representa uma multiplicação repetida. Para um expoente inteiro positivo $n$,
+
+\begin{equation}
+  a^n=\underbrace{a\cdot a\cdot a\cdots a}_{n\text{ fatores}}.
+\end{equation}
+
+Por exemplo,
+
+\begin{equation}
+  3^4=3\cdot3\cdot3\cdot3=81.
+\end{equation}
+
+Para uma mesma base não nula, valem as propriedades
+
+\begin{align}
+  a^m a^n &= a^{m+n},\\
+  \frac{a^m}{a^n} &= a^{m-n},\\
+  \left(a^m\right)^n &= a^{mn},\\
+  a^{-n} &= \frac{1}{a^n},\\
+  a^0 &= 1.
+\end{align}
+
+Potências fracionárias representam raízes. Para $a\geq0$,
+
+\begin{equation}
+  a^{1/2}=\sqrt{a}
+\end{equation}
+
+e
+
+
+\begin{equation}
+  a^{1/n}=\sqrt[n]{a}.
+\end{equation}
+
+Essas propriedades aparecem frequentemente na manipulação de fórmulas físicas. Se uma grandeza depende de $x^2$, por exemplo, multiplicar $x$ por 3 multiplica essa grandeza por $3^2=9$.
+
+\subsection{Potências em Python}
+
+Em Python, o operador de potência é formado por dois asteriscos, 	exttt{**}. O símbolo 	exttt{\^} não representa potência: ele executa uma operação binária chamada \emph{XOR}.
+
+\lstinputlisting[
+  caption={Potências, raízes e uma aplicação à energia cinética.},
+  label={lst:potencias-escalas}
+]{codigos/cap01/potencias_e_escalas.py}
+
+O valor calculado para $64^{1/3}$ pode aparecer como $3{,}9999999999999996$ em vez de 4. Isso ocorre porque muitos números reais não possuem representação binária finita no computador. A formatação 	exttt{:.2f} controla a apresentação do resultado, mas não altera o valor armazenado.
+
+No trecho final do \cref{lst:potencias-escalas}, triplicamos a velocidade e verificamos numericamente que a energia cinética é multiplicada por nove. O programa, portanto, não apenas calcula um valor: ele testa uma previsão obtida pela análise matemática.
+
+\section{Notação científica e ordem de grandeza}
+
+A Física estuda fenômenos em escalas muito diferentes. O diâmetro aproximado de um próton é da ordem de $10^{-15}\,\si{\meter}$, enquanto a distância entre estrelas pode chegar a muitos trilhões de quilômetros. Escrever números tão pequenos ou tão grandes na forma decimal dificulta cálculos e comparações.
+
+A notação científica representa um número na forma
+
+\begin{equation}
+  N=a\times10^n,
+  \qquad 1\leq |a|<10,
+\end{equation}
+
+em que $n$ é um número inteiro.
+
+Por exemplo,
+
+\begin{equation}
+  \SI{0.0000048}{\second}
+  =\SI{4.8e-6}{\second}.
+\end{equation}
+
+O expoente $-6$ informa que a vírgula foi deslocada seis posições para a direita para obter o número $4{,}8$.
+
+Para um número grande,
+
+\begin{equation}
+  \SI{384000000}{\meter}
+  =\SI{3.84e8}{\meter}.
+\end{equation}
+
+Nesse caso, a vírgula foi deslocada oito posições para a esquerda.
+
+\subsection{Operações com notação científica}
+
+Na multiplicação, multiplicamos os coeficientes e somamos os expoentes:
+
+\begin{equation}
+  \left(a\times10^m\right)\left(b\times10^n\right)
+  =ab\times10^{m+n}.
+\end{equation}
+
+Como exemplo,
+
+\begin{equation}
+  \left(3\times10^4\right)\left(2\times10^{-2}\right)
+  =6\times10^2.
+\end{equation}
+
+Na divisão, dividimos os coeficientes e subtraímos os expoentes:
+
+\begin{equation}
+  \frac{a\times10^m}{b\times10^n}
+  =\frac{a}{b}\times10^{m-n}.
+\end{equation}
+
+Portanto,
+
+\begin{equation}
+  \frac{8\times10^7}{2\times10^3}
+  =4\times10^4.
+\end{equation}
+
+Na adição e na subtração, os expoentes precisam ser iguais. Por exemplo,
+
+\begin{align}
+  3{,}2\times10^5+7{,}0\times10^4
+  &=3{,}2\times10^5+0{,}7\times10^5\\
+  &=3{,}9\times10^5.
+\end{align}
+
+\subsection{Ordem de grandeza}
+
+A ordem de grandeza é a potência de dez mais próxima do valor considerado. Ela permite comparar escalas e avaliar rapidamente se um resultado é plausível.
+
+Considere
+
+\begin{equation}
+  N=a\times10^n,
+  \qquad 1\leq a<10.
+\end{equation}
+
+Como o ponto médio entre $10^n$ e $10^{n+1}$, em escala logarítmica, corresponde a $\sqrt{10}\approx3{,}16$, adotamos
+
+\begin{equation}
+  \operatorname{OG}(N)=
+  \begin{cases}
+    10^n, & a<\sqrt{10},\\
+    10^{n+1}, & a\geq\sqrt{10}.
+  \end{cases}
+\end{equation}
+
+Assim, $2{,}4\times10^6$ tem ordem de grandeza $10^6$, enquanto $7{,}1\times10^6$ tem ordem de grandeza $10^7$.
+
+\subsection{Estimativas físicas}
+
+Antes de aceitar o resultado de um cálculo, devemos perguntar:
+
+\begin{itemize}
+  \item A unidade está correta?
+  \item O sinal possui significado físico?
+  \item O valor está na escala esperada?
+  \item O resultado respeita os limites do modelo?
+\end{itemize}
+
+Uma velocidade cotidiana de $3\times10^7\,\si{\meter\per\second}$ é matematicamente possível como número, mas incompatível com uma caminhada, um automóvel ou um avião. Um resultado assim provavelmente indica erro de unidade, entrada ou interpretação.
+
+\subsection*{Exemplo resolvido}
+
+Um sinal percorre $1{,}5\times10^8\,\si{\meter}$ em $5{,}0\times10^{-1}\,\si{\second}$. Sua velocidade média é
+
+\begin{equation}
+  v_m=\frac{\Delta s}{\Delta t}.
+\end{equation}
+
+Substituindo,
+
+\begin{align}
+  v_m
+  &=\frac{1{,}5\times10^8}{5{,}0\times10^{-1}}\\
+  &=\frac{1{,}5}{5{,}0}\times10^{8-(-1)}\\
+  &=0{,}30\times10^9\\
+  &=3{,}0\times10^8\,\si{\meter\per\second}.
+\end{align}
+
+Além de efetuar o cálculo, devemos interpretar o resultado. O valor está na ordem de grandeza da velocidade da luz no vácuo, indicando que o modelo pode estar descrevendo a propagação de um sinal eletromagnético.
+
+\subsection*{Verificação conceitual}
+
+\begin{enumerate}
+  \item Escreva $0{,}00000032\,\si{\meter}$ em notação científica.
+  \item Escreva $6{,}02\times10^{23}$ na forma decimal.
+  \item Determine a ordem de grandeza de $2{,}8\times10^5$.
+  \item Determine a ordem de grandeza de $8{,}4\times10^5$.
+  \item Explique por que a ordem de grandeza é útil para validar resultados físicos.
+\end{enumerate}
+
+\section{Proporcionalidade e leis de escala}
+
+As relações de proporcionalidade ajudam a prever como uma grandeza física muda quando outra é alterada. Muitas vezes, essa análise pode ser feita antes de qualquer substituição numérica.
+
+\subsection{Proporcionalidade direta}
+
+Quando escrevemos
+
+\begin{equation}
+  y\propto x,
+\end{equation}
+
+afirmamos que existe uma constante $k$ tal que
+
+\begin{equation}
+  y=kx.
+\end{equation}
+
+A razão entre as duas grandezas permanece constante:
+
+\begin{equation}
+  \frac{y}{x}=k.
+\end{equation}
+
+Se $x$ for multiplicado por um fator $f$, então $y$ será multiplicado pelo mesmo fator:
+
+\begin{equation}
+  x'=fx
+  \quad\Rightarrow\quad
+  y'=fy.
+\end{equation}
+
+Por exemplo, se a distância percorrida por um objeto com velocidade constante é
+
+\begin{equation}
+  d=vt,
+\end{equation}
+
+então, mantendo $v$ constante,
+
+\begin{equation}
+  d\propto t.
+\end{equation}
+
+Se o intervalo de tempo dobrar, a distância também dobrará.
+
+\subsection{Proporcionalidade com uma potência}
+
+Uma relação mais geral pode ser escrita como
+
+\begin{equation}
+  y\propto x^n,
+\end{equation}
+
+ou
+
+\begin{equation}
+  y=kx^n.
+\end{equation}
+
+Quando $x$ é multiplicado por um fator $f$,
+
+\begin{equation}
+  x'=fx,
+\end{equation}
+
+temos
+
+\begin{equation}
+  y'=k(fx)^n=f^nkx^n.
+\end{equation}
+
+Portanto,
+
+\begin{equation}
+  \frac{y'}{y}=f^n.
+\end{equation}
+
+Essa expressão permite prever a mudança de $y$ sem conhecer o valor da constante $k$.
+
+\subsection*{Exemplo resolvido: energia cinética}
+
+A energia cinética de um corpo de massa $m$ e velocidade $v$ é
+
+\begin{equation}
+  E_c=\frac{1}{2}mv^2.
+\end{equation}
+
+Mantendo a massa constante,
+
+\begin{equation}
+  E_c\propto v^2.
+\end{equation}
+
+Se a velocidade for triplicada, $v'=3v$. Assim,
+
+\begin{equation}
+  \frac{E_c'}{E_c}
+  =\left(\frac{v'}{v}\right)^2
+  =3^2
+  =9.
+\end{equation}
+
+Portanto, triplicar a velocidade multiplica a energia cinética por nove. Esse resultado não significa apenas que a energia aumentou. Ele mostra que a dependência quadrática torna o aumento da energia mais rápido que o aumento da velocidade.
+
+\subsection{Proporcionalidade inversa}
+
+Quando
+
+\begin{equation}
+  y\propto\frac{1}{x},
+\end{equation}
+
+temos
+
+\begin{equation}
+  y=\frac{k}{x}.
+\end{equation}
+
+Nesse caso, $xy=k$. Se $x$ for duplicado, $y$ será reduzido à metade.
+
+De maneira mais geral,
+
+\begin{equation}
+  y\propto\frac{1}{x^n}.
+\end{equation}
+
+Se $x$ for multiplicado por $f$, então
+
+\begin{equation}
+  \frac{y'}{y}=\frac{1}{f^n}.
+\end{equation}
+
+\subsection*{Exemplo resolvido: intensidade e distância}
+
+Considere um modelo idealizado no qual a intensidade $I$ recebida de uma fonte puntiforme é inversamente proporcional ao quadrado da distância $r$:
+
+\begin{equation}
+  I\propto\frac{1}{r^2}.
+\end{equation}
+
+Queremos comparar a intensidade a uma distância $r$ com a intensidade a uma distância $4r$:
+
+\begin{equation}
+  \frac{I(4r)}{I(r)}
+  =\frac{1/(4r)^2}{1/r^2}
+  =\frac{1}{16}.
+\end{equation}
+
+Ao quadruplicar a distância, a intensidade é reduzida a um dezesseis avos do valor inicial. Esse comportamento pode ser compreendido geometricamente: a mesma quantidade emitida pela fonte distribui-se por uma área que cresce proporcionalmente a $r^2$.
+
+\subsection{Proporcionalidade conjunta}
+
+Uma grandeza pode depender de mais de uma variável. Por exemplo,
+
+\begin{equation}
+  y\propto\frac{a^2b}{c^3}.
+\end{equation}
+
+Nesse caso,
+
+\begin{equation}
+  y=k\frac{a^2b}{c^3}.
+\end{equation}
+
+Se $a$ dobrar, $b$ for triplicado e $c$ permanecer constante, então
+
+\begin{equation}
+  \frac{y'}{y}=2^2\cdot3=12.
+\end{equation}
+
+A grandeza $y$ será multiplicada por 12.
+
+\subsection{Isolamento de variáveis}
+
+As fórmulas físicas também precisam ser reorganizadas de acordo com a grandeza procurada. Considere
+
+\begin{equation}
+  E_c=\frac{1}{2}mv^2.
+\end{equation}
+
+Para isolar $v$, multiplicamos a equação por 2:
+
+\begin{equation}
+  2E_c=mv^2.
+\end{equation}
+
+Dividimos por $m$:
+
+\begin{equation}
+  v^2=\frac{2E_c}{m}.
+\end{equation}
+
+Finalmente,
+
+\begin{equation}
+  v=\sqrt{\frac{2E_c}{m}}.
+\end{equation}
+
+Como $v$ representa o módulo da velocidade, escolhemos a raiz não negativa. Em outros contextos, uma equação quadrática pode admitir soluções positivas e negativas com significados físicos diferentes.
+
+\subsection{Limites de uma proporcionalidade}
+
+Uma proporcionalidade física geralmente vale dentro de determinadas condições. A expressão
+
+\begin{equation}
+  F=k\Delta x
+\end{equation}
+
+descreve aproximadamente uma mola enquanto ela permanece em seu regime elástico. Um alongamento excessivo pode deformar permanentemente o material, tornando o modelo inadequado.
+
+Portanto, identificar uma proporcionalidade exige também perguntar:
+
+\begin{itemize}
+  \item Quais grandezas permanecem constantes?
+  \item Em qual intervalo a relação foi observada?
+  \item Quais hipóteses foram utilizadas?
+  \item Em que situação o modelo deixa de funcionar?
+\end{itemize}
+
+\subsection*{Verificação conceitual}
+
+\begin{enumerate}
+  \item Se $y\propto x^3$, por qual fator $y$ muda quando $x$ dobra?
+  \item Se $y\propto1/x^2$, por qual fator $y$ muda quando $x$ é dividido por 3?
+  \item Mantendo a velocidade constante, como a energia cinética varia quando a massa é multiplicada por 5?
+  \item Mantendo a massa constante, por qual fator a velocidade deve mudar para que a energia cinética seja multiplicada por 4?
+  \item Se $P\propto A^2/(BC)$, determine o fator de mudança de $P$ quando $A$ dobra, $B$ triplica e $C$ é reduzido à metade.
+  \item Explique por que uma proporcionalidade matematicamente correta pode deixar de representar um sistema físico real.
+\end{enumerate}
+
+\section{Logaritmos e escalas logarítmicas}
+
+O logaritmo responde à seguinte pergunta: a qual expoente devemos elevar uma base para obter determinado número? Se
+
+\begin{equation}
+  b^y=x,
+\end{equation}
+
+então
+
+\begin{equation}
+  y=\log_bx,
+\end{equation}
+
+com as condições $b>0$, $b\neq1$ e $x>0$.
+
+Por exemplo, $10^3=1000$ implica
+
+\begin{equation}
+  \log_{10}(1000)=3.
+\end{equation}
+
+Da mesma forma, $2^{-3}=1/8$ implica
+
+\begin{equation}
+  \log_2\left(\frac{1}{8}\right)=-3.
+\end{equation}
+
+\subsection{Bases mais utilizadas}
+
+O logaritmo decimal possui base 10:
+
+\begin{equation}
+  \log x=\log_{10}x.
+\end{equation}
+
+O logaritmo natural possui base $\e\approx2{,}71828$ e é representado por
+
+\begin{equation}
+  \ln x=\log_\e x.
+\end{equation}
+
+O logaritmo natural aparece naturalmente em processos exponenciais, equações diferenciais, oscilações amortecidas e fenômenos de crescimento ou decaimento.
+
+\subsection{Propriedades fundamentais}
+
+Para $a>0$, $b>0$ e qualquer número real $n$,
+
+\begin{align}
+  \log(ab) &= \log a+\log b,\\
+  \log\left(\frac{a}{b}\right) &= \log a-\log b,\\
+  \log(a^n) &= n\log a.
+\end{align}
+
+Também temos $\log_b1=0$ e $\log_bb=1$. Essas propriedades transformam multiplicações em adições, divisões em subtrações e potências em produtos.
+
+\subsection{Mudança de base}
+
+Um logaritmo pode ser convertido de uma base para outra por meio de
+
+\begin{equation}
+  \log_bx=\frac{\log_cx}{\log_cb}.
+\end{equation}
+
+Em particular,
+
+\begin{equation}
+  \log_bx=\frac{\ln x}{\ln b}.
+\end{equation}
+
+\subsection{Logaritmos e leis de potência}
+
+Considere uma relação física da forma
+
+\begin{equation}
+  y=Cx^n,
+\end{equation}
+
+em que $C$ e $n$ são constantes. Aplicando o logaritmo aos dois lados,
+
+\begin{equation}
+  \log y=\log C+n\log x.
+\end{equation}
+
+Definindo $Y=\log y$ e $X=\log x$, obtemos
+
+\begin{equation}
+  Y=nX+\log C.
+\end{equation}
+
+Essa é a equação de uma reta. Em um gráfico de $\log y$ em função de $\log x$, a inclinação corresponde ao expoente $n$, e a interseção com o eixo vertical corresponde a $\log C$.
+
+\subsection*{Exemplo resolvido: determinação de uma lei de escala}
+
+Uma grandeza $y$ apresenta os valores
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+$x$ & $y$\\
+\midrule
+2 & 12\\
+4 & 48\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Suponha que $y=Cx^n$. Dividindo as duas equações,
+
+\begin{equation}
+  \frac{48}{12}=\frac{C4^n}{C2^n}.
+\end{equation}
+
+Logo, $4=2^n$ e, portanto, $n=2$. Usando $x=2$ e $y=12$,
+
+\begin{equation}
+  12=C(2)^2,
+\end{equation}
+
+de onde $C=3$. Assim, a relação encontrada é
+
+\begin{equation}
+  y=3x^2.
+\end{equation}
+
+\subsection{Escalas logarítmicas}
+
+Uma escala linear representa diferenças iguais por distâncias iguais. Uma escala logarítmica representa razões iguais por distâncias iguais. Em uma escala logarítmica de base 10, os valores $1$, $10$, $100$ e $1000$ ficam igualmente espaçados porque cada valor é dez vezes maior que o anterior.
+
+Esse tipo de escala é útil quando uma grandeza percorre muitas ordens de magnitude. Ela permite representar valores muito diferentes no mesmo gráfico sem comprimir excessivamente os menores.
+
+\subsection*{Exemplo físico: nível de intensidade sonora}
+
+O nível de intensidade sonora é definido por
+
+\begin{equation}
+  \beta=10\log_{10}\left(\frac{I}{I_0}\right),
+\end{equation}
+
+em que $\beta$ é medido em decibéis, $I$ é a intensidade sonora e $I_0$ é uma intensidade de referência.
+
+Se $I=1000I_0$, então
+
+\begin{equation}
+  \beta=10\log_{10}(1000)=\SI{30}{\decibel}.
+\end{equation}
+
+Se a intensidade for multiplicada por 10, o nível aumenta em \SI{10}{\decibel}:
+
+\begin{align}
+  \beta'
+  &=10\log_{10}\left(\frac{10I}{I_0}\right)\\
+  &=10\left[\log_{10}(10)+\log_{10}\left(\frac{I}{I_0}\right)\right]\\
+  &=\SI{10}{\decibel}+\beta.
+\end{align}
+
+\subsection{Argumentos dimensionais}
+
+O argumento de um logaritmo deve ser adimensional. Por isso, expressões físicas logarítmicas normalmente envolvem razões entre grandezas de mesma dimensão, como
+
+\begin{equation}
+  \ln\left(\frac{x}{x_0}\right)
+\end{equation}
+
+e
+
+\begin{equation}
+  \log_{10}\left(\frac{I}{I_0}\right).
+\end{equation}
+
+Uma expressão como $\ln(\SI{3}{\meter})$ não é fisicamente adequada, pois seu argumento ainda possui dimensão de comprimento.
+
+\subsection{Logaritmos e exponenciais como operações inversas}
+
+As funções exponencial e logarítmica desfazem uma à outra:
+
+\begin{equation}
+  \ln(\e^x)=x
+\end{equation}
+
+e, para $x>0$,
+
+\begin{equation}
+  \e^{\ln x}=x.
+\end{equation}
+
+\subsection*{Exemplo resolvido: tempo de decaimento}
+
+Considere
+
+\begin{equation}
+  N(t)=N_0\e^{-t/\tau}.
+\end{equation}
+
+Queremos determinar o instante em que $N(t)=N_0/4$. Substituindo e dividindo por $N_0$,
+
+\begin{equation}
+  \frac{1}{4}=\e^{-t/\tau}.
+\end{equation}
+
+Aplicando o logaritmo natural,
+
+\begin{equation}
+  \ln\left(\frac{1}{4}\right)=-\frac{t}{\tau}.
+\end{equation}
+
+Como $\ln(1/4)=-\ln4$, obtemos
+
+\begin{equation}
+  t=\tau\ln4\approx1{,}386\tau.
+\end{equation}
+
+\subsection*{Verificação conceitual}
+
+\begin{enumerate}
+  \item Calcule $\log_{10}(10^{-6})$.
+  \item Simplifique $\ln(a^3/b)$.
+  \item Resolva $\e^{2x}=7$.
+  \item Uma relação experimental obedece a $y=Cx^n$. Quando $x$ dobra, $y$ é multiplicado por oito. Determine $n$.
+  \item Por que o argumento de um logaritmo físico deve ser adimensional?
+  \item Quantos decibéis são acrescentados quando a intensidade sonora é multiplicada por 100?
+  \item Em $N(t)=N_0\e^{-t/\tau}$, determine o instante em que $N=N_0/10$.
+\end{enumerate}
+
+\section{Ângulos e trigonometria}
+
+Um ângulo pode ser medido em graus ou radianos. O radiano é a unidade natural do cálculo e relaciona o comprimento de arco $s$ ao raio $r$:
+
+\begin{equation}
+  \theta=\frac{s}{r}.
+\end{equation}
+
+Uma volta completa corresponde a $2\pi$ radianos ou $360^\circ$. Portanto,
+
+\begin{equation}
+  \theta_{\mathrm{rad}}=\theta_{\mathrm{graus}}\frac{\pi}{180}.
+\end{equation}
+
+Em um triângulo retângulo,
+
+\begin{equation}
+  \sin\theta=\frac{\text{cateto oposto}}{\text{hipotenusa}},\qquad
+  \cos\theta=\frac{\text{cateto adjacente}}{\text{hipotenusa}},
+\end{equation}
+
+e
+
+
+\begin{equation}
+  \tan\theta=\frac{\sin\theta}{\cos\theta}.
+\end{equation}
+
+A identidade fundamental
+
+\begin{equation}
+  \sin^2\theta+\cos^2\theta=1
+\end{equation}
+
+decorre do teorema de Pitágoras aplicado ao círculo unitário.
+
+\subsection*{Exemplo: componentes de uma força}
+
+Uma força de módulo \SI{80}{\newton} forma um ângulo de $30^\circ$ acima da horizontal. Suas componentes cartesianas são
+
+\begin{align}
+  F_x &= F\cos\theta
+       = \SI{80}{\newton}\cos 30^\circ
+       \approx \SI{69.3}{\newton},\\
+  F_y &= F\sin\theta
+       = \SI{80}{\newton}\sin 30^\circ
+       = \SI{40}{\newton}.
+\end{align}
+
+Mais adiante, representaremos essa decomposição com vetores e verificaremos graficamente que $F^2=F_x^2+F_y^2$.
+
+\section{Funções e gráficos}
+
+Uma função associa cada valor permitido da variável independente a um valor da variável dependente. Em Física, a notação $x(t)$ indica que a posição $x$ depende do tempo $t$.
+
+Antes de desenhar um gráfico, devemos identificar:
+
+\begin{enumerate}
+  \item as grandezas representadas nos eixos;
+  \item as unidades utilizadas;
+  \item o domínio fisicamente relevante;
+  \item os pontos de interseção com os eixos;
+  \item o comportamento crescente, decrescente ou oscilatório;
+  \item os limites do modelo.
+\end{enumerate}
+
+\subsection{Relação linear}
+
+A função
+
+\begin{equation}
+  y=mx+b
+\end{equation}
+
+representa uma reta. O coeficiente angular
+
+\begin{equation}
+  m=\frac{\Delta y}{\Delta x}
+\end{equation}
+
+mede a variação de $y$ por unidade de $x$, enquanto $b$ é o valor de $y$ quando $x=0$.
+
+Na \cref{eq:posicao-mu}, a inclinação de um gráfico $x\times t$ é a velocidade $v$, e a interseção com o eixo vertical é a posição inicial $x_0$. As unidades da inclinação também carregam significado:
+
+\begin{equation}
+  [v]=\frac{[x]}{[t]}=\si{\meter\per\second}.
+\end{equation}
+
+\subsection{Leis de potência e relações inversas}
+
+Funções como $y=kx^2$ aparecem em movimentos acelerados e energias; funções como $y=k/x^2$ aparecem em modelos de campos produzidos por fontes puntiformes. A forma do gráfico ajuda a distinguir essas relações, mas a interpretação deve respeitar o domínio físico. Uma expressão que diverge em $x=0$ costuma indicar que o modelo idealizado deixou de ser aplicável nessa região.
+
+\subsection{Comportamento exponencial}
+
+Uma função de decaimento possui a forma
+
+\begin{equation}
+  y(t)=y_0\e^{-t/\tau},
+\end{equation}
+
+onde $\tau$ define a escala temporal. Em $t=\tau$,
+
+\begin{equation}
+  y(\tau)=\frac{y_0}{\e}\approx 0{,}368y_0.
+\end{equation}
+
+Esse comportamento surge quando a taxa de variação de uma grandeza é proporcional ao próprio valor da grandeza.
+
+\section{Derivada: taxa de variação instantânea}
+
+A taxa média de variação de $f$ entre $x$ e $x+\Delta x$ é
+
+\begin{equation}
+  \frac{\Delta f}{\Delta x}
+  =\frac{f(x+\Delta x)-f(x)}{\Delta x}.
+\end{equation}
+
+Ao considerar intervalos progressivamente menores, definimos a derivada:
+
+\begin{equation}
+  \frac{\dd f}{\dd x}
+  =\lim_{\Delta x\to 0}
+  \frac{f(x+\Delta x)-f(x)}{\Delta x}.
+\end{equation}
+
+Geometricamente, a derivada é a inclinação da reta tangente ao gráfico. Fisicamente, seu significado depende das grandezas envolvidas. Para a posição $x(t)$,
+
+\begin{equation}
+  v(t)=\frac{\dd x}{\dd t},
+\end{equation}
+
+e para a velocidade,
+
+\begin{equation}
+  a(t)=\frac{\dd v}{\dd t}
+      =\frac{\dd^2x}{\dd t^2}.
+\end{equation}
+
+Algumas derivadas frequentes são
+
+\begin{align}
+  \frac{\dd}{\dd x}x^n &= nx^{n-1},\\
+  \frac{\dd}{\dd x}\sin x &= \cos x,\\
+  \frac{\dd}{\dd x}\cos x &= -\sin x,\\
+  \frac{\dd}{\dd x}\e^x &= \e^x,\\
+  \frac{\dd}{\dd x}\ln x &= \frac{1}{x}.
+\end{align}
+
+As fórmulas trigonométricas pressupõem que $x$ esteja em radianos.
+
+\subsection*{Exemplo: movimento não uniforme}
+
+Considere
+
+\begin{equation}
+  x(t)=\SI{2}{\meter}
+       +\left(\SI{3}{\meter\per\second}\right)t
+       +\left(\SI{0.5}{\meter\per\second\squared}\right)t^2.
+\end{equation}
+
+Derivando em relação ao tempo,
+
+\begin{equation}
+  v(t)=\SI{3}{\meter\per\second}
+       +\left(\SI{1}{\meter\per\second\squared}\right)t.
+\end{equation}
+
+A aceleração é constante e vale $\SI{1}{\meter\per\second\squared}$. Observe que os coeficientes possuem unidades diferentes para que todos os termos de $x(t)$ tenham dimensão de comprimento.
+
+\section{Integral: acumulação}
+
+A integral definida pode ser entendida como o limite de uma soma de pequenas contribuições. Se conhecemos a velocidade em função do tempo, o deslocamento entre $t_1$ e $t_2$ é
+
+\begin{equation}
+  \Delta x=\int_{t_1}^{t_2}v(t)\,\dd t.
+\end{equation}
+
+Geometricamente, essa integral corresponde à área algébrica sob o gráfico $v\times t$. Regiões abaixo do eixo temporal contribuem negativamente, o que distingue deslocamento de distância total percorrida.
+
+Algumas integrais elementares são
+
+\begin{align}
+  \int x^n\,\dd x &= \frac{x^{n+1}}{n+1}+C,
+  \qquad n\neq -1,\\
+  \int \frac{1}{x}\,\dd x &= \ln|x|+C,\\
+  \int \sin x\,\dd x &= -\cos x+C,\\
+  \int \cos x\,\dd x &= \sin x+C,\\
+  \int \e^x\,\dd x &= \e^x+C.
+\end{align}
+
+A constante $C$ aparece porque funções que diferem apenas por uma constante possuem a mesma derivada.
+
+\subsection*{Exemplo: deslocamento com velocidade variável}
+
+Para $v(t)=\alpha t$, onde $\alpha$ possui unidade de aceleração,
+
+\begin{equation}
+  \Delta x
+  =\int_0^T \alpha t\,\dd t
+  =\frac{1}{2}\alpha T^2.
+\end{equation}
+
+O mesmo resultado corresponde à área de um triângulo de base $T$ e altura $\alpha T$ no gráfico de velocidade por tempo.
+
+\section{Máximos, mínimos e interpretação física}
+
+Em um ponto interior onde uma função diferenciável possui máximo ou mínimo local, sua derivada é nula:
+
+\begin{equation}
+  f'(x)=0.
+\end{equation}
+
+Essa condição identifica pontos candidatos; não basta, sozinha, para classificá-los. Se
+
+\begin{equation}
+  f''(x)>0,
+\end{equation}
+
+a concavidade é voltada para cima e o ponto é um mínimo local. Se $f''(x)<0$, temos um máximo local. Também é necessário examinar fronteiras do domínio e pontos onde a derivada não existe.
+
+\subsection*{Exemplo: altura máxima}
+
+Uma pequena esfera é lançada verticalmente, e sua altura é descrita pelo modelo
+
+\begin{equation}
+  h(t)=\SI{1.2}{\meter}
+       +\left(\SI{8}{\meter\per\second}\right)t
+       -\frac{1}{2}\left(\SI{9.8}{\meter\per\second\squared}\right)t^2.
+\end{equation}
+
+O instante de altura máxima satisfaz $\dd h/\dd t=0$:
+
+\begin{equation}
+  8-9{,}8t=0
+  \quad\Rightarrow\quad
+  t\approx\SI{0.816}{\second}.
+\end{equation}
+
+Como $\dd^2h/\dd t^2=-\SI{9.8}{\meter\per\second\squared}$, a concavidade é negativa e o ponto é de máximo. A interpretação física coincide com o cálculo: no ponto mais alto, a velocidade vertical é momentaneamente nula.
+
+\section{Estratégia para resolver problemas}
+
+Uma solução organizada costuma seguir estas etapas:
+
+\begin{enumerate}
+  \item identificar a pergunta e o sistema físico;
+  \item listar dados, incógnitas e unidades;
+  \item desenhar uma representação quando ela ajudar;
+  \item declarar hipóteses e escolher um modelo;
+  \item desenvolver a solução simbolicamente antes de substituir números;
+  \item verificar dimensões, sinal e ordem de grandeza;
+  \item interpretar o resultado no contexto do problema;
+  \item reconhecer limitações do modelo.
+\end{enumerate}
+
+Programas de computador podem automatizar operações e ampliar nossa capacidade de exploração, mas não escolhem sozinhos o sistema, as hipóteses ou o significado físico do resultado. Essa responsabilidade permanece com quem modela.
+
+\section{Síntese}
+
+Neste capítulo:
+
+\begin{itemize}
+  \item usamos notação científica e potências para lidar com escalas físicas;
+  \item distinguimos proporcionalidade direta, quadrática e inversa;
+  \item revisamos logaritmos e trigonometria;
+  \item interpretamos gráficos como representações de relações entre grandezas;
+  \item associamos derivadas a taxas instantâneas;
+  \item associamos integrais a acumulações e áreas algébricas;
+  \item usamos derivadas para localizar extremos;
+  \item estabelecemos critérios para verificar resultados físicos.
+\end{itemize}
+
+\section{Exercícios propostos}
+
+Os exercícios abaixo foram elaborados para este livro.
+
+\begin{enumerate}
+  \item Escreva em notação científica o diâmetro de \SI{0.00000032}{\meter}. Em seguida, converta-o para nanômetros.
+
+  \item A energia armazenada em certo sistema é proporcional ao quadrado de uma variável $q$. Por qual fator a energia muda quando $q$ é multiplicada por 3?
+
+  \item A intensidade de um sinal idealizado é inversamente proporcional ao quadrado da distância. Compare a intensidade a \SI{2}{\meter} e a \SI{6}{\meter} da fonte.
+
+  \item Uma força de \SI{120}{\newton} forma $40^\circ$ com o eixo horizontal. Determine suas componentes cartesianas.
+
+  \item Converta $150^\circ$ para radianos e $5\pi/6$ radianos para graus.
+
+  \item Para $x(t)=4+2t-3t^2$, determine as funções velocidade e aceleração. Indique as unidades que os coeficientes devem possuir se $x$ estiver em metros e $t$ em segundos.
+
+  \item A velocidade de um objeto é $v(t)=5-2t$, em unidades do SI. Calcule o deslocamento entre $t=0$ e $t=4\,\si{\second}$. Explique o sinal do resultado usando o gráfico $v\times t$.
+
+  \item Determine os pontos críticos de $f(x)=x^3-6x^2+9x+2$ e classifique-os quando possível.
+
+  \item A temperatura de um corpo é modelada por $T(t)=T_{\mathrm{amb}}+\Delta T_0\e^{-t/\tau}$. Mostre que a taxa de variação de $T-T_{\mathrm{amb}}$ é proporcional ao próprio excesso de temperatura.
+
+  \item Uma reta em um gráfico posição-tempo passa pelos pontos $(\SI{2}{\second},\SI{7}{\meter})$ e $(\SI{8}{\second},\SI{25}{\meter})$. Determine sua inclinação, interprete-a fisicamente e encontre a posição em $t=0$.
+\end{enumerate}

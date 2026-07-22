@@ -1,0 +1,279 @@
+\chapter{Python: ambiente e fundamentos}
+\label{cap:python-fundamentos}
+
+\section{O papel do Python neste livro}
+
+Python é uma linguagem de programação de propósito geral. Neste livro, ela será usada como ferramenta de investigação: realizaremos cálculos, analisaremos dados, construiremos gráficos, desenharemos vetores e simularemos modelos físicos.
+
+O código não substitui a formulação matemática nem a interpretação física. Ele permite executar um procedimento de forma reproduzível e explorar situações que seriam trabalhosas manualmente. Um resultado numérico só se torna fisicamente útil depois que suas unidades, hipóteses e limites são examinados.
+
+Adotaremos o \textbf{Python 3.12}. Versões posteriores da série 3 provavelmente executarão a maior parte dos exemplos, mas a versão 3.12 será nossa referência de desenvolvimento e validação. Fixar uma versão reduz diferenças de comportamento entre computadores e facilita a reprodução dos resultados.
+
+\section{Interpretador, programa e script}
+
+O interpretador Python é o programa que lê e executa instruções escritas na linguagem Python. Uma instrução pode ser digitada em uma sessão interativa ou armazenada em um arquivo de texto com extensão 	exttt{.py}.
+
+Um arquivo como
+
+\begin{center}
+  \texttt{primeiro\_programa.py}
+\end{center}
+
+é chamado de \emph{script}. No terminal integrado do VS Code, ele pode ser executado com
+
+\begin{lstlisting}[language={},numbers=none]
+python primeiro_programa.py
+\end{lstlisting}
+
+Neste projeto, o interpretador do ambiente virtual pode ser selecionado diretamente pelo VS Code. Isso garante que o editor utilize a mesma versão de Python e as mesmas bibliotecas usadas na validação do livro.
+
+\section{Onde escrever e executar Python}
+
+Python não está vinculado a um único programa. Um arquivo com extensão \texttt{.py} pode ser escrito em diferentes editores e ambientes, desde que um interpretador compatível e as bibliotecas necessárias estejam disponíveis.
+
+É útil distinguir três conceitos:
+
+\begin{itemize}
+  \item um \textbf{editor de código} oferece recursos para escrever e organizar arquivos;
+  \item uma \textbf{IDE}, ou ambiente integrado de desenvolvimento, reúne editor, execução, depuração, terminal e ferramentas de projeto;
+  \item um \textbf{notebook} organiza texto, equações, código e resultados em células executáveis.
+\end{itemize}
+
+Entre as alternativas mais conhecidas estão:
+
+\begin{description}
+  \item[Visual Studio Code:] editor extensível que, com a extensão Python, oferece execução, depuração, terminal integrado e suporte a notebooks. Será o ambiente principal de validação deste livro.
+
+  \item[JupyterLab:] ambiente local orientado a notebooks. É especialmente útil para exploração de dados, testes rápidos e combinação de explicações com resultados computacionais.
+
+  \item[Google Colab:] serviço executado no navegador e baseado em notebooks. Permite escrever e executar Python sem instalar previamente um ambiente completo no computador. A sessão é remota e temporária; arquivos e bibliotecas instalados durante uma sessão podem não permanecer disponíveis na sessão seguinte.
+
+  \item[PyCharm:] IDE dedicada ao desenvolvimento em Python, com ferramentas de navegação, testes e depuração de projetos.
+
+  \item[Spyder:] IDE voltada à computação científica, com editor, console interativo e visualização de variáveis.
+\end{description}
+
+Também é possível executar Python diretamente em um terminal ou utilizar outros editores. A escolha do ambiente não altera as leis físicas nem a sintaxe fundamental da linguagem, mas pode mudar a forma de executar arquivos, instalar bibliotecas e visualizar gráficos.
+
+Os exemplos deste livro serão escritos como scripts Python portáveis. Sempre que um recurso depender especificamente de notebook, VS Code ou Colab, essa dependência será indicada. Para garantir que os resultados publicados possam ser reproduzidos, a validação oficial será realizada no ambiente virtual do projeto com Python 3.12.
+
+\section{O primeiro programa}
+
+A função 	exttt{print} envia uma representação de um valor para a saída do programa:
+
+\begin{lstlisting}
+print("Fisica com Python")
+\end{lstlisting}
+
+O texto entre aspas é uma \emph{string}, isto é, uma sequência de caracteres. Ao executar a instrução, o terminal apresenta
+
+\begin{lstlisting}[language={},numbers=none]
+Fisica com Python
+\end{lstlisting}
+
+Os parênteses delimitam os argumentos fornecidos à função. Nesse exemplo, 	exttt{print} recebeu uma string como argumento.
+
+\section{Valores, variáveis e atribuição}
+
+Uma variável é um nome associado a um valor. A instrução
+
+\begin{lstlisting}
+massa = 2.5
+\end{lstlisting}
+
+associa o nome 	exttt{massa} ao valor numérico 	exttt{2.5}. O símbolo 	exttt{=} realiza uma \textbf{atribuição}; ele não afirma uma igualdade algébrica permanente.
+
+Depois de
+
+\begin{lstlisting}
+velocidade = 3.0
+velocidade = 5.0
+\end{lstlisting}
+
+o nome 	exttt{velocidade} está associado a 	exttt{5.0}. A segunda atribuição substitui a referência anterior.
+
+Nomes de variáveis devem comunicar seu significado. Usaremos, por exemplo,
+
+\begin{lstlisting}
+tempo_total = 12.0
+velocidade_inicial = 4.5
+\end{lstlisting}
+
+em vez de nomes genéricos como 	exttt{a} ou 	exttt{x1}, exceto quando a notação matemática justificar nomes curtos.
+
+O Python não associa unidades físicas automaticamente a números comuns. Por isso, as unidades devem ser declaradas no texto, nos comentários e nos rótulos das saídas:
+
+\begin{lstlisting}
+distancia = 120.0  # metros
+tempo = 10.0       # segundos
+\end{lstlisting}
+
+O caractere 	exttt{\#} inicia um comentário. O interpretador ignora o restante daquela linha, mas o comentário ajuda uma pessoa a compreender o programa.
+
+\section{Tipos fundamentais}
+
+Cada valor possui um tipo. Entre os tipos fundamentais estão:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Tipo & Significado & Exemplo\\
+\midrule
+\texttt{int} & número inteiro & 	exttt{12}\\
+\texttt{float} & número de ponto flutuante & 	exttt{9.81}\\
+\texttt{str} & sequência de caracteres & 	exttt{"tempo"}\\
+\texttt{bool} & valor lógico & 	exttt{True}, 	exttt{False}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A função 	exttt{type} informa o tipo de um valor:
+
+\begin{lstlisting}
+print(type(12))
+print(type(9.81))
+\end{lstlisting}
+
+Um 	exttt{float} é uma aproximação computacional de um número real. Como sua representação possui precisão finita, algumas operações produzem pequenas diferenças de arredondamento. Esse comportamento será considerado sempre que compararmos resultados numéricos.
+
+\section{Operadores aritméticos}
+
+Os operadores aritméticos básicos são:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Operador & Operação & Exemplo\\
+\midrule
+\texttt{+} & adição & 	exttt{a + b}\\
+\texttt{-} & subtração & 	exttt{a - b}\\
+\texttt{*} & multiplicação & 	exttt{a * b}\\
+\texttt{/} & divisão & 	exttt{a / b}\\
+\texttt{**} & potência & 	exttt{a ** 2}\\
+\texttt{//} & divisão inteira & 	exttt{a // b}\\
+\texttt{\%} & resto da divisão & 	exttt{a \% b}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A precedência das operações é semelhante à utilizada na álgebra. Parênteses devem ser usados quando tornam a intenção mais clara:
+
+\begin{lstlisting}
+energia = 0.5 * massa * velocidade**2
+media = (medida_1 + medida_2) / 2
+\end{lstlisting}
+
+\section{Apresentação de resultados}
+
+Uma \emph{f-string} permite inserir valores em um texto:
+
+\begin{lstlisting}
+energia = 9.0
+print(f"Energia cinetica: {energia:.2f} J")
+\end{lstlisting}
+
+A especificação 	exttt{:.2f} apresenta o número com duas casas decimais. A saída será
+
+\begin{lstlisting}[language={},numbers=none]
+Energia cinetica: 9.00 J
+\end{lstlisting}
+
+Formatar um valor não aumenta a precisão do cálculo. A formatação controla apenas como o número é exibido.
+
+\section{Funções}
+
+Uma função reúne instruções associadas a uma tarefa. Ela pode receber valores de entrada, chamados argumentos, e devolver um resultado:
+
+\begin{lstlisting}
+def energia_cinetica(massa, velocidade):
+    return 0.5 * massa * velocidade**2
+\end{lstlisting}
+
+A palavra 	exttt{def} inicia a definição; os dois-pontos abrem um bloco; a indentação identifica as instruções pertencentes à função; e 	exttt{return} devolve o resultado.
+
+A função pode ser utilizada por meio de uma chamada:
+
+\begin{lstlisting}
+energia = energia_cinetica(2.0, 3.0)
+print(energia)
+\end{lstlisting}
+
+Separar um cálculo em uma função reduz repetição, facilita testes e explicita o modelo empregado.
+
+\section{Módulos e bibliotecas}
+
+Um módulo é um arquivo que contém definições Python reutilizáveis. Uma biblioteca é uma coleção organizada de módulos. O comando 	exttt{import} torna essas definições disponíveis no programa.
+
+O módulo 	exttt{math} pertence à biblioteca padrão, instalada juntamente com o Python:
+
+\begin{lstlisting}
+import math
+
+raiz = math.sqrt(25)
+angulo = math.radians(30)
+\end{lstlisting}
+
+O prefixo 	exttt{math.} informa em qual módulo a função foi definida e evita ambiguidades.
+
+Bibliotecas externas são instaladas separadamente. Neste livro, as principais serão:
+
+\begin{itemize}
+  \item \textbf{NumPy}: arrays e computação numérica;
+  \item \textbf{Matplotlib}: gráficos e visualizações;
+  \item \textbf{SciPy}: algoritmos científicos;
+  \item \textbf{SymPy}: matemática simbólica.
+\end{itemize}
+
+Um exemplo de importação é
+
+\begin{lstlisting}
+import numpy as np
+import matplotlib.pyplot as plt
+\end{lstlisting}
+
+Os nomes 	exttt{np} e 	exttt{plt} são convenções amplamente utilizadas. Eles são aliases: nomes abreviados associados aos módulos importados.
+
+\section{Ambiente virtual e dependências}
+
+Um ambiente virtual isola o interpretador e as bibliotecas de um projeto. Assim, projetos diferentes podem utilizar versões diferentes de uma mesma biblioteca sem interferência entre si.
+
+Neste repositório, o ambiente local fica na pasta 	exttt{.venv}. No terminal do VS Code para Windows, ele pode ser ativado com
+
+\begin{lstlisting}[language={},numbers=none]
+.\.venv\Scripts\Activate.ps1
+\end{lstlisting}
+
+As dependências declaradas no arquivo 	exttt{requirements.txt} podem ser instaladas com
+
+\begin{lstlisting}[language={},numbers=none]
+python -m pip install -r requirements.txt
+\end{lstlisting}
+
+O comando 	exttt{python -m pip} garante que o instalador utilizado pertence ao interpretador Python selecionado.
+
+\section{Erros como informação}
+
+Uma mensagem de erro não significa apenas que o programa falhou. Ela registra onde ocorreu o problema e qual regra foi violada. Três categorias aparecerão com frequência:
+
+\begin{itemize}
+  \item \texttt{SyntaxError}: a instrução não segue a sintaxe da linguagem;
+  \item \texttt{NameError}: um nome foi usado sem estar definido;
+  \item \texttt{TypeError}: uma operação recebeu um tipo incompatível.
+\end{itemize}
+
+Ao investigar um erro, devemos ler a última linha da mensagem e localizar o arquivo e a linha indicados. Corrigir erros faz parte do processo normal de modelagem computacional.
+
+\section{Critério de validação}
+
+Antes de considerar um código aprovado, verificaremos:
+
+\begin{enumerate}
+  \item se o programa executa sem erros;
+  \item se as unidades utilizadas são consistentes;
+  \item se o resultado coincide com um caso calculado manualmente;
+  \item se casos-limite produzem comportamento coerente;
+  \item se nomes, comentários e saídas são compreensíveis;
+  \item se gráficos possuem eixos, unidades e legendas adequados.
+\end{enumerate}
+
+Esses critérios acompanharão todos os códigos do livro.

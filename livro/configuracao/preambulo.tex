@@ -1,0 +1,57 @@
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{siunitx}
+\sisetup{
+  locale = DE,
+  per-mode = symbol,
+  separate-uncertainty = true
+}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage[
+  colorlinks=true,
+  linkcolor=blue!50!black,
+  citecolor=green!40!black,
+  urlcolor=blue!60!black
+]{hyperref}
+\usepackage[nameinlink,noabbrev,brazilian]{cleveref}
+
+\graphicspath{{figuras/}}
+
+\newcommand{\vetor}[1]{\boldsymbol{#1}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+
+\definecolor{corcodigo}{RGB}{30,70,105}
+\definecolor{fundocodigo}{RGB}{247,249,251}
+
+\lstdefinestyle{pythonlivro}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{corcodigo}\bfseries,
+  commentstyle=\color{green!40!black},
+  stringstyle=\color{orange!60!black},
+  backgroundcolor=\color{fundocodigo},
+  frame=single,
+  rulecolor=\color{black!20},
+  numbers=left,
+  numberstyle=\tiny\color{black!55},
+  breaklines=true,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true
+}
+
+\lstset{style=pythonlivro}
+

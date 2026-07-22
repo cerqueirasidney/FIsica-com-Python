@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.py[cod]
+.vscode/
+
+# Arquivos auxiliares do LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# Saídas geradas
+livro/build/
+
